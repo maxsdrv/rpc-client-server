@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package testrpc;
+
+service TestgRPC {
+
+    rpc get_summ(Variables) returns (Operator) {}
+
+    rpc record_summ(stream Variables) returns (OperatorsSummary) {}
+
+    rpc summ_chat(stream SummNote) returns (stream SummNote) {}
+
+}
+
+message Variables {
+    // value for operators calculate
+    int32 value = 1;
+}
+
+message Operator {
+    // operator name
+    string name = 1;
+
+    //result summary
+    Variables result = 2;
+}
+
+message SummNote {
+    // kind of operator
+    Variables type_operator = 1;
+
+    // message to sent
+    string message = 2;
+}
+
+message OperatorsSummary {
+    // how much value for summ sent
+    int32 variables_count = 1;
+    // how much operators sent
+    int32 feature_count = 2;
+
+    int32 elapsed_time = 3;
+}

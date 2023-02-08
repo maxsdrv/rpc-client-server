@@ -1,0 +1,36 @@
+[{
+    "values": {
+      "first": 5,
+      "second": 10
+    },
+    "name": "Operator 1"
+},
+  {
+    "values": {
+      "first": 230,
+      "second": 140
+    },
+    "name": "Operator 2"
+  },
+  {
+    "values": {
+      "first": 4,
+      "second": 5
+    },
+    "name": "Operator 3"
+  },
+  {
+    "values": {
+      "first": 20,
+      "second": 6
+    },
+    "name": "Operator 4"
+  },
+  {
+    "values": {
+      "first": 100,
+      "second": 1500
+    },
+    "name": "Operator 5"
+  }
+]
