@@ -12,16 +12,16 @@ get_filename_component(tr_proto "protos/test_rpc.proto" ABSOLUTE)
 get_filename_component(tr_proto_path "${tr_proto}" PATH)
 
 # Generated sources
-set(tr_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/test_rpc.pb.cc")
-set(tr_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/test_rpc.pb.h")
-set(tr_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/test_rpc.grpc.pb.cc")
-set(tr_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/test_rpc.grpc.pb.h")
+set(tr_proto_srcs "${CMAKE_CURRENT_SOURCE_DIR}/test_rpc.pb.cc")
+set(tr_proto_hdrs "${CMAKE_CURRENT_SOURCE_DIR}/test_rpc.pb.h")
+set(tr_grpc_srcs "${CMAKE_CURRENT_SOURCE_DIR}/test_rpc.grpc.pb.cc")
+set(tr_grpc_hdrs "${CMAKE_CURRENT_SOURCE_DIR}/test_rpc.grpc.pb.h")
 add_custom_command(
     OUTPUT "${tr_proto_srcs}" "${tr_proto_hdrs}" "${tr_grpc_srcs}"
     "${tr_grpc_hdrs}"
     COMMAND ${_PROTOBUF_PROTOC}
-    ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
-    --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
+    ARGS --grpc_out "${CMAKE_CURRENT_SOURCE_DIR}"
+    --cpp_out "${CMAKE_CURRENT_SOURCE_DIR}"
     -I "${tr_proto_path}"
     --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
     "${tr_proto}"
@@ -29,7 +29,7 @@ add_custom_command(
     )
 
 # Include generated *.pb.h files
-include_directories("${CMAKE_CURRENT_BINARY_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
 # tr_grpc_proto
 add_library(tr_grpc_proto
@@ -52,8 +52,6 @@ target_link_libraries(test_rpc_parser
     ${_GRPC_GRPCPP}
     ${_PROTOBUF_LIBPROTOBUF})
 
-#add_executable(${PROJECT_NAME} main.cpp)
-
 # Targets test_rpc(client|server)
 foreach(_target
         test_client test_server)
@@ -61,6 +59,7 @@ foreach(_target
             "${_target}.cpp" )
         target_link_libraries(${_target}
             tr_grpc_proto
+            test_rpc_parser
             ${_REFLECTION}
             ${_GRPC_GRPCPP}
             ${_PROTOBUF_LIBPROTOBUF})
