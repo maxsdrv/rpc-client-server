@@ -4,11 +4,13 @@ package testrpc;
 
 service TestgRPC {
 
-    rpc get_summ(Variables) returns (Operator) {}
+    rpc get_result(Variables) returns (Addition) {}
 
-    rpc record_summ(stream Variables) returns (OperatorsSummary) {}
+    rpc list_operators(Operator) returns (stream Operator) {}
 
-    rpc summ_chat(stream SummNote) returns (stream SummNote) {}
+    rpc record_result(stream Variables) returns (OperatorsSummary) {}
+
+    rpc result_chat(stream SummNote) returns (stream SummNote) {}
 
 }
 
@@ -23,7 +25,11 @@ message Operator {
     string name = 1;
 
     //result summary
-    Variables result = 2;
+    Addition addition_ = 2;
+}
+
+message Addition {
+    int32 result_ = 1;
 }
 
 message SummNote {

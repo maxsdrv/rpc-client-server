@@ -45,6 +45,9 @@ struct TableStruct_test_5frpc_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_test_5frpc_2eproto;
 namespace testrpc {
+class Addition;
+struct AdditionDefaultTypeInternal;
+extern AdditionDefaultTypeInternal _Addition_default_instance_;
 class Operator;
 struct OperatorDefaultTypeInternal;
 extern OperatorDefaultTypeInternal _Operator_default_instance_;
@@ -59,6 +62,7 @@ struct VariablesDefaultTypeInternal;
 extern VariablesDefaultTypeInternal _Variables_default_instance_;
 }  // namespace testrpc
 PROTOBUF_NAMESPACE_OPEN
+template<> ::testrpc::Addition* Arena::CreateMaybeMessage<::testrpc::Addition>(Arena*);
 template<> ::testrpc::Operator* Arena::CreateMaybeMessage<::testrpc::Operator>(Arena*);
 template<> ::testrpc::OperatorsSummary* Arena::CreateMaybeMessage<::testrpc::OperatorsSummary>(Arena*);
 template<> ::testrpc::SummNote* Arena::CreateMaybeMessage<::testrpc::SummNote>(Arena*);
@@ -349,7 +353,7 @@ class Operator final :
 
   enum : int {
     kNameFieldNumber = 1,
-    kResultFieldNumber = 2,
+    kAdditionFieldNumber = 2,
   };
   // string name = 1;
   void clear_name();
@@ -365,23 +369,23 @@ class Operator final :
   std::string* _internal_mutable_name();
   public:
 
-  // .testrpc.Variables result = 2;
-  bool has_result() const;
+  // .testrpc.Addition addition_ = 2;
+  bool has_addition_() const;
   private:
-  bool _internal_has_result() const;
+  bool _internal_has_addition_() const;
   public:
-  void clear_result();
-  const ::testrpc::Variables& result() const;
-  PROTOBUF_NODISCARD ::testrpc::Variables* release_result();
-  ::testrpc::Variables* mutable_result();
-  void set_allocated_result(::testrpc::Variables* result);
+  void clear_addition_();
+  const ::testrpc::Addition& addition_() const;
+  PROTOBUF_NODISCARD ::testrpc::Addition* release_addition_();
+  ::testrpc::Addition* mutable_addition_();
+  void set_allocated_addition_(::testrpc::Addition* addition_);
   private:
-  const ::testrpc::Variables& _internal_result() const;
-  ::testrpc::Variables* _internal_mutable_result();
+  const ::testrpc::Addition& _internal_addition_() const;
+  ::testrpc::Addition* _internal_mutable_addition_();
   public:
-  void unsafe_arena_set_allocated_result(
-      ::testrpc::Variables* result);
-  ::testrpc::Variables* unsafe_arena_release_result();
+  void unsafe_arena_set_allocated_addition_(
+      ::testrpc::Addition* addition_);
+  ::testrpc::Addition* unsafe_arena_release_addition_();
 
   // @@protoc_insertion_point(class_scope:testrpc.Operator)
  private:
@@ -392,7 +396,155 @@ class Operator final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::testrpc::Variables* result_;
+    ::testrpc::Addition* addition__;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_test_5frpc_2eproto;
+};
+// -------------------------------------------------------------------
+
+class Addition final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:testrpc.Addition) */ {
+ public:
+  inline Addition() : Addition(nullptr) {}
+  ~Addition() override;
+  explicit PROTOBUF_CONSTEXPR Addition(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  Addition(const Addition& from);
+  Addition(Addition&& from) noexcept
+    : Addition() {
+    *this = ::std::move(from);
+  }
+
+  inline Addition& operator=(const Addition& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Addition& operator=(Addition&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Addition& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Addition* internal_default_instance() {
+    return reinterpret_cast<const Addition*>(
+               &_Addition_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(Addition& a, Addition& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Addition* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Addition* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Addition* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<Addition>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const Addition& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const Addition& from) {
+    Addition::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Addition* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "testrpc.Addition";
+  }
+  protected:
+  explicit Addition(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kResultFieldNumber = 1,
+  };
+  // int32 result_ = 1;
+  void clear_result_();
+  int32_t result_() const;
+  void set_result_(int32_t value);
+  private:
+  int32_t _internal_result_() const;
+  void _internal_set_result_(int32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:testrpc.Addition)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    int32_t result__;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -448,7 +600,7 @@ class SummNote final :
                &_SummNote_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(SummNote& a, SummNote& b) {
     a.Swap(&b);
@@ -621,7 +773,7 @@ class OperatorsSummary final :
                &_OperatorsSummary_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(OperatorsSummary& a, OperatorsSummary& b) {
     a.Swap(&b);
@@ -846,45 +998,45 @@ inline void Operator::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:testrpc.Operator.name)
 }
 
-// .testrpc.Variables result = 2;
-inline bool Operator::_internal_has_result() const {
-  return this != internal_default_instance() && _impl_.result_ != nullptr;
+// .testrpc.Addition addition_ = 2;
+inline bool Operator::_internal_has_addition_() const {
+  return this != internal_default_instance() && _impl_.addition__ != nullptr;
 }
-inline bool Operator::has_result() const {
-  return _internal_has_result();
+inline bool Operator::has_addition_() const {
+  return _internal_has_addition_();
 }
-inline void Operator::clear_result() {
-  if (GetArenaForAllocation() == nullptr && _impl_.result_ != nullptr) {
-    delete _impl_.result_;
+inline void Operator::clear_addition_() {
+  if (GetArenaForAllocation() == nullptr && _impl_.addition__ != nullptr) {
+    delete _impl_.addition__;
   }
-  _impl_.result_ = nullptr;
+  _impl_.addition__ = nullptr;
 }
-inline const ::testrpc::Variables& Operator::_internal_result() const {
-  const ::testrpc::Variables* p = _impl_.result_;
-  return p != nullptr ? *p : reinterpret_cast<const ::testrpc::Variables&>(
-      ::testrpc::_Variables_default_instance_);
+inline const ::testrpc::Addition& Operator::_internal_addition_() const {
+  const ::testrpc::Addition* p = _impl_.addition__;
+  return p != nullptr ? *p : reinterpret_cast<const ::testrpc::Addition&>(
+      ::testrpc::_Addition_default_instance_);
 }
-inline const ::testrpc::Variables& Operator::result() const {
-  // @@protoc_insertion_point(field_get:testrpc.Operator.result)
-  return _internal_result();
+inline const ::testrpc::Addition& Operator::addition_() const {
+  // @@protoc_insertion_point(field_get:testrpc.Operator.addition_)
+  return _internal_addition_();
 }
-inline void Operator::unsafe_arena_set_allocated_result(
-    ::testrpc::Variables* result) {
+inline void Operator::unsafe_arena_set_allocated_addition_(
+    ::testrpc::Addition* addition_) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.result_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.addition__);
   }
-  _impl_.result_ = result;
-  if (result) {
+  _impl_.addition__ = addition_;
+  if (addition_) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:testrpc.Operator.result)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:testrpc.Operator.addition_)
 }
-inline ::testrpc::Variables* Operator::release_result() {
+inline ::testrpc::Addition* Operator::release_addition_() {
   
-  ::testrpc::Variables* temp = _impl_.result_;
-  _impl_.result_ = nullptr;
+  ::testrpc::Addition* temp = _impl_.addition__;
+  _impl_.addition__ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -896,44 +1048,68 @@ inline ::testrpc::Variables* Operator::release_result() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::testrpc::Variables* Operator::unsafe_arena_release_result() {
-  // @@protoc_insertion_point(field_release:testrpc.Operator.result)
+inline ::testrpc::Addition* Operator::unsafe_arena_release_addition_() {
+  // @@protoc_insertion_point(field_release:testrpc.Operator.addition_)
   
-  ::testrpc::Variables* temp = _impl_.result_;
-  _impl_.result_ = nullptr;
+  ::testrpc::Addition* temp = _impl_.addition__;
+  _impl_.addition__ = nullptr;
   return temp;
 }
-inline ::testrpc::Variables* Operator::_internal_mutable_result() {
+inline ::testrpc::Addition* Operator::_internal_mutable_addition_() {
   
-  if (_impl_.result_ == nullptr) {
-    auto* p = CreateMaybeMessage<::testrpc::Variables>(GetArenaForAllocation());
-    _impl_.result_ = p;
+  if (_impl_.addition__ == nullptr) {
+    auto* p = CreateMaybeMessage<::testrpc::Addition>(GetArenaForAllocation());
+    _impl_.addition__ = p;
   }
-  return _impl_.result_;
+  return _impl_.addition__;
 }
-inline ::testrpc::Variables* Operator::mutable_result() {
-  ::testrpc::Variables* _msg = _internal_mutable_result();
-  // @@protoc_insertion_point(field_mutable:testrpc.Operator.result)
+inline ::testrpc::Addition* Operator::mutable_addition_() {
+  ::testrpc::Addition* _msg = _internal_mutable_addition_();
+  // @@protoc_insertion_point(field_mutable:testrpc.Operator.addition_)
   return _msg;
 }
-inline void Operator::set_allocated_result(::testrpc::Variables* result) {
+inline void Operator::set_allocated_addition_(::testrpc::Addition* addition_) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.result_;
+    delete _impl_.addition__;
   }
-  if (result) {
+  if (addition_) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(result);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(addition_);
     if (message_arena != submessage_arena) {
-      result = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, result, submessage_arena);
+      addition_ = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, addition_, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.result_ = result;
-  // @@protoc_insertion_point(field_set_allocated:testrpc.Operator.result)
+  _impl_.addition__ = addition_;
+  // @@protoc_insertion_point(field_set_allocated:testrpc.Operator.addition_)
+}
+
+// -------------------------------------------------------------------
+
+// Addition
+
+// int32 result_ = 1;
+inline void Addition::clear_result_() {
+  _impl_.result__ = 0;
+}
+inline int32_t Addition::_internal_result_() const {
+  return _impl_.result__;
+}
+inline int32_t Addition::result_() const {
+  // @@protoc_insertion_point(field_get:testrpc.Addition.result_)
+  return _internal_result_();
+}
+inline void Addition::_internal_set_result_(int32_t value) {
+  
+  _impl_.result__ = value;
+}
+inline void Addition::set_result_(int32_t value) {
+  _internal_set_result_(value);
+  // @@protoc_insertion_point(field_set:testrpc.Addition.result_)
 }
 
 // -------------------------------------------------------------------
@@ -1147,6 +1323,8 @@ inline void OperatorsSummary::set_elapsed_time(int32_t value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -35,87 +35,110 @@ class TestgRPC final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    virtual ::grpc::Status get_summ(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::testrpc::Operator* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>> Asyncget_summ(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>>(Asyncget_summRaw(context, request, cq));
+    virtual ::grpc::Status get_result(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::testrpc::Operator* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>> Asyncget_result(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>>(Asyncget_resultRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>> PrepareAsyncget_summ(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>>(PrepareAsyncget_summRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>> PrepareAsyncget_result(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>>(PrepareAsyncget_resultRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientWriterInterface< ::testrpc::Variables>> record_summ(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response) {
-      return std::unique_ptr< ::grpc::ClientWriterInterface< ::testrpc::Variables>>(record_summRaw(context, response));
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::testrpc::Operator>> list_operators(::grpc::ClientContext* context, const ::testrpc::Operator& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::testrpc::Operator>>(list_operatorsRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>> Asyncrecord_summ(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>>(Asyncrecord_summRaw(context, response, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::testrpc::Operator>> Asynclist_operators(::grpc::ClientContext* context, const ::testrpc::Operator& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::testrpc::Operator>>(Asynclist_operatorsRaw(context, request, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>> PrepareAsyncrecord_summ(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>>(PrepareAsyncrecord_summRaw(context, response, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::testrpc::Operator>> PrepareAsynclist_operators(::grpc::ClientContext* context, const ::testrpc::Operator& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::testrpc::Operator>>(PrepareAsynclist_operatorsRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>> summ_chat(::grpc::ClientContext* context) {
-      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>>(summ_chatRaw(context));
+    std::unique_ptr< ::grpc::ClientWriterInterface< ::testrpc::Variables>> record_result(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response) {
+      return std::unique_ptr< ::grpc::ClientWriterInterface< ::testrpc::Variables>>(record_resultRaw(context, response));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>> Asyncsumm_chat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>>(Asyncsumm_chatRaw(context, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>> Asyncrecord_result(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>>(Asyncrecord_resultRaw(context, response, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>> PrepareAsyncsumm_chat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>>(PrepareAsyncsumm_chatRaw(context, cq));
+    std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>> PrepareAsyncrecord_result(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>>(PrepareAsyncrecord_resultRaw(context, response, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>> result_chat(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>>(result_chatRaw(context));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>> Asyncresult_chat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>>(Asyncresult_chatRaw(context, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>> PrepareAsyncresult_chat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>>(PrepareAsyncresult_chatRaw(context, cq));
     }
     class async_interface {
      public:
       virtual ~async_interface() {}
-      virtual void get_summ(::grpc::ClientContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void get_summ(::grpc::ClientContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      virtual void record_summ(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::ClientWriteReactor< ::testrpc::Variables>* reactor) = 0;
-      virtual void summ_chat(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::testrpc::SummNote,::testrpc::SummNote>* reactor) = 0;
+      virtual void get_result(::grpc::ClientContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void get_result(::grpc::ClientContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void list_operators(::grpc::ClientContext* context, const ::testrpc::Operator* request, ::grpc::ClientReadReactor< ::testrpc::Operator>* reactor) = 0;
+      virtual void record_result(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::ClientWriteReactor< ::testrpc::Variables>* reactor) = 0;
+      virtual void result_chat(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::testrpc::SummNote,::testrpc::SummNote>* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>* Asyncget_summRaw(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>* PrepareAsyncget_summRaw(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientWriterInterface< ::testrpc::Variables>* record_summRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response) = 0;
-    virtual ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>* Asyncrecord_summRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq, void* tag) = 0;
-    virtual ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>* PrepareAsyncrecord_summRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>* summ_chatRaw(::grpc::ClientContext* context) = 0;
-    virtual ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>* Asyncsumm_chatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
-    virtual ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>* PrepareAsyncsumm_chatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>* Asyncget_resultRaw(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::testrpc::Operator>* PrepareAsyncget_resultRaw(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::testrpc::Operator>* list_operatorsRaw(::grpc::ClientContext* context, const ::testrpc::Operator& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::testrpc::Operator>* Asynclist_operatorsRaw(::grpc::ClientContext* context, const ::testrpc::Operator& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::testrpc::Operator>* PrepareAsynclist_operatorsRaw(::grpc::ClientContext* context, const ::testrpc::Operator& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientWriterInterface< ::testrpc::Variables>* record_resultRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response) = 0;
+    virtual ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>* Asyncrecord_resultRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncWriterInterface< ::testrpc::Variables>* PrepareAsyncrecord_resultRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>* result_chatRaw(::grpc::ClientContext* context) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>* Asyncresult_chatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::testrpc::SummNote, ::testrpc::SummNote>* PrepareAsyncresult_chatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    ::grpc::Status get_summ(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::testrpc::Operator* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>> Asyncget_summ(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>>(Asyncget_summRaw(context, request, cq));
+    ::grpc::Status get_result(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::testrpc::Operator* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>> Asyncget_result(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>>(Asyncget_resultRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>> PrepareAsyncget_summ(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>>(PrepareAsyncget_summRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>> PrepareAsyncget_result(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>>(PrepareAsyncget_resultRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientWriter< ::testrpc::Variables>> record_summ(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response) {
-      return std::unique_ptr< ::grpc::ClientWriter< ::testrpc::Variables>>(record_summRaw(context, response));
+    std::unique_ptr< ::grpc::ClientReader< ::testrpc::Operator>> list_operators(::grpc::ClientContext* context, const ::testrpc::Operator& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::testrpc::Operator>>(list_operatorsRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriter< ::testrpc::Variables>> Asyncrecord_summ(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriter< ::testrpc::Variables>>(Asyncrecord_summRaw(context, response, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::testrpc::Operator>> Asynclist_operators(::grpc::ClientContext* context, const ::testrpc::Operator& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::testrpc::Operator>>(Asynclist_operatorsRaw(context, request, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriter< ::testrpc::Variables>> PrepareAsyncrecord_summ(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriter< ::testrpc::Variables>>(PrepareAsyncrecord_summRaw(context, response, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::testrpc::Operator>> PrepareAsynclist_operators(::grpc::ClientContext* context, const ::testrpc::Operator& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::testrpc::Operator>>(PrepareAsynclist_operatorsRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>> summ_chat(::grpc::ClientContext* context) {
-      return std::unique_ptr< ::grpc::ClientReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>>(summ_chatRaw(context));
+    std::unique_ptr< ::grpc::ClientWriter< ::testrpc::Variables>> record_result(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response) {
+      return std::unique_ptr< ::grpc::ClientWriter< ::testrpc::Variables>>(record_resultRaw(context, response));
     }
-    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>> Asyncsumm_chat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>>(Asyncsumm_chatRaw(context, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncWriter< ::testrpc::Variables>> Asyncrecord_result(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncWriter< ::testrpc::Variables>>(Asyncrecord_resultRaw(context, response, cq, tag));
     }
-    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>> PrepareAsyncsumm_chat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>>(PrepareAsyncsumm_chatRaw(context, cq));
+    std::unique_ptr< ::grpc::ClientAsyncWriter< ::testrpc::Variables>> PrepareAsyncrecord_result(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncWriter< ::testrpc::Variables>>(PrepareAsyncrecord_resultRaw(context, response, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>> result_chat(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>>(result_chatRaw(context));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>> Asyncresult_chat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>>(Asyncresult_chatRaw(context, cq, tag));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>> PrepareAsyncresult_chat(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>>(PrepareAsyncresult_chatRaw(context, cq));
     }
     class async final :
       public StubInterface::async_interface {
      public:
-      void get_summ(::grpc::ClientContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response, std::function<void(::grpc::Status)>) override;
-      void get_summ(::grpc::ClientContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void record_summ(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::ClientWriteReactor< ::testrpc::Variables>* reactor) override;
-      void summ_chat(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::testrpc::SummNote,::testrpc::SummNote>* reactor) override;
+      void get_result(::grpc::ClientContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response, std::function<void(::grpc::Status)>) override;
+      void get_result(::grpc::ClientContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void list_operators(::grpc::ClientContext* context, const ::testrpc::Operator* request, ::grpc::ClientReadReactor< ::testrpc::Operator>* reactor) override;
+      void record_result(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::ClientWriteReactor< ::testrpc::Variables>* reactor) override;
+      void result_chat(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::testrpc::SummNote,::testrpc::SummNote>* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -127,17 +150,21 @@ class TestgRPC final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>* Asyncget_summRaw(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>* PrepareAsyncget_summRaw(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientWriter< ::testrpc::Variables>* record_summRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response) override;
-    ::grpc::ClientAsyncWriter< ::testrpc::Variables>* Asyncrecord_summRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq, void* tag) override;
-    ::grpc::ClientAsyncWriter< ::testrpc::Variables>* PrepareAsyncrecord_summRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* summ_chatRaw(::grpc::ClientContext* context) override;
-    ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* Asyncsumm_chatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
-    ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* PrepareAsyncsumm_chatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
-    const ::grpc::internal::RpcMethod rpcmethod_get_summ_;
-    const ::grpc::internal::RpcMethod rpcmethod_record_summ_;
-    const ::grpc::internal::RpcMethod rpcmethod_summ_chat_;
+    ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>* Asyncget_resultRaw(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::testrpc::Operator>* PrepareAsyncget_resultRaw(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::testrpc::Operator>* list_operatorsRaw(::grpc::ClientContext* context, const ::testrpc::Operator& request) override;
+    ::grpc::ClientAsyncReader< ::testrpc::Operator>* Asynclist_operatorsRaw(::grpc::ClientContext* context, const ::testrpc::Operator& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::testrpc::Operator>* PrepareAsynclist_operatorsRaw(::grpc::ClientContext* context, const ::testrpc::Operator& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientWriter< ::testrpc::Variables>* record_resultRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response) override;
+    ::grpc::ClientAsyncWriter< ::testrpc::Variables>* Asyncrecord_resultRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncWriter< ::testrpc::Variables>* PrepareAsyncrecord_resultRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* result_chatRaw(::grpc::ClientContext* context) override;
+    ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* Asyncresult_chatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* PrepareAsyncresult_chatRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_get_result_;
+    const ::grpc::internal::RpcMethod rpcmethod_list_operators_;
+    const ::grpc::internal::RpcMethod rpcmethod_record_result_;
+    const ::grpc::internal::RpcMethod rpcmethod_result_chat_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -145,353 +172,482 @@ class TestgRPC final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status get_summ(::grpc::ServerContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response);
-    virtual ::grpc::Status record_summ(::grpc::ServerContext* context, ::grpc::ServerReader< ::testrpc::Variables>* reader, ::testrpc::OperatorsSummary* response);
-    virtual ::grpc::Status summ_chat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* stream);
+    virtual ::grpc::Status get_result(::grpc::ServerContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response);
+    virtual ::grpc::Status list_operators(::grpc::ServerContext* context, const ::testrpc::Operator* request, ::grpc::ServerWriter< ::testrpc::Operator>* writer);
+    virtual ::grpc::Status record_result(::grpc::ServerContext* context, ::grpc::ServerReader< ::testrpc::Variables>* reader, ::testrpc::OperatorsSummary* response);
+    virtual ::grpc::Status result_chat(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* stream);
   };
   template <class BaseClass>
-  class WithAsyncMethod_get_summ : public BaseClass {
+  class WithAsyncMethod_get_result : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_get_summ() {
+    WithAsyncMethod_get_result() {
       ::grpc::Service::MarkMethodAsync(0);
     }
-    ~WithAsyncMethod_get_summ() override {
+    ~WithAsyncMethod_get_result() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status get_summ(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
+    ::grpc::Status get_result(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void Requestget_summ(::grpc::ServerContext* context, ::testrpc::Variables* request, ::grpc::ServerAsyncResponseWriter< ::testrpc::Operator>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void Requestget_result(::grpc::ServerContext* context, ::testrpc::Variables* request, ::grpc::ServerAsyncResponseWriter< ::testrpc::Operator>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_record_summ : public BaseClass {
+  class WithAsyncMethod_list_operators : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_record_summ() {
+    WithAsyncMethod_list_operators() {
       ::grpc::Service::MarkMethodAsync(1);
     }
-    ~WithAsyncMethod_record_summ() override {
+    ~WithAsyncMethod_list_operators() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status record_summ(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::testrpc::Variables>* /*reader*/, ::testrpc::OperatorsSummary* /*response*/) override {
+    ::grpc::Status list_operators(::grpc::ServerContext* /*context*/, const ::testrpc::Operator* /*request*/, ::grpc::ServerWriter< ::testrpc::Operator>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void Requestrecord_summ(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::testrpc::OperatorsSummary, ::testrpc::Variables>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncClientStreaming(1, context, reader, new_call_cq, notification_cq, tag);
+    void Requestlist_operators(::grpc::ServerContext* context, ::testrpc::Operator* request, ::grpc::ServerAsyncWriter< ::testrpc::Operator>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(1, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_summ_chat : public BaseClass {
+  class WithAsyncMethod_record_result : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_summ_chat() {
+    WithAsyncMethod_record_result() {
       ::grpc::Service::MarkMethodAsync(2);
     }
-    ~WithAsyncMethod_summ_chat() override {
+    ~WithAsyncMethod_record_result() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status summ_chat(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* /*stream*/)  override {
+    ::grpc::Status record_result(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::testrpc::Variables>* /*reader*/, ::testrpc::OperatorsSummary* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void Requestsumm_chat(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncBidiStreaming(2, context, stream, new_call_cq, notification_cq, tag);
+    void Requestrecord_result(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::testrpc::OperatorsSummary, ::testrpc::Variables>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncClientStreaming(2, context, reader, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_get_summ<WithAsyncMethod_record_summ<WithAsyncMethod_summ_chat<Service > > > AsyncService;
   template <class BaseClass>
-  class WithCallbackMethod_get_summ : public BaseClass {
+  class WithAsyncMethod_result_chat : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithCallbackMethod_get_summ() {
+    WithAsyncMethod_result_chat() {
+      ::grpc::Service::MarkMethodAsync(3);
+    }
+    ~WithAsyncMethod_result_chat() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status result_chat(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void Requestresult_chat(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(3, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_get_result<WithAsyncMethod_list_operators<WithAsyncMethod_record_result<WithAsyncMethod_result_chat<Service > > > > AsyncService;
+  template <class BaseClass>
+  class WithCallbackMethod_get_result : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_get_result() {
       ::grpc::Service::MarkMethodCallback(0,
           new ::grpc::internal::CallbackUnaryHandler< ::testrpc::Variables, ::testrpc::Operator>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response) { return this->get_summ(context, request, response); }));}
-    void SetMessageAllocatorFor_get_summ(
+                   ::grpc::CallbackServerContext* context, const ::testrpc::Variables* request, ::testrpc::Operator* response) { return this->get_result(context, request, response); }));}
+    void SetMessageAllocatorFor_get_result(
         ::grpc::MessageAllocator< ::testrpc::Variables, ::testrpc::Operator>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::testrpc::Variables, ::testrpc::Operator>*>(handler)
               ->SetMessageAllocator(allocator);
     }
-    ~WithCallbackMethod_get_summ() override {
+    ~WithCallbackMethod_get_result() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status get_summ(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
+    ::grpc::Status get_result(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* get_summ(
+    virtual ::grpc::ServerUnaryReactor* get_result(
       ::grpc::CallbackServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithCallbackMethod_record_summ : public BaseClass {
+  class WithCallbackMethod_list_operators : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithCallbackMethod_record_summ() {
+    WithCallbackMethod_list_operators() {
       ::grpc::Service::MarkMethodCallback(1,
-          new ::grpc::internal::CallbackClientStreamingHandler< ::testrpc::Variables, ::testrpc::OperatorsSummary>(
+          new ::grpc::internal::CallbackServerStreamingHandler< ::testrpc::Operator, ::testrpc::Operator>(
             [this](
-                   ::grpc::CallbackServerContext* context, ::testrpc::OperatorsSummary* response) { return this->record_summ(context, response); }));
+                   ::grpc::CallbackServerContext* context, const ::testrpc::Operator* request) { return this->list_operators(context, request); }));
     }
-    ~WithCallbackMethod_record_summ() override {
+    ~WithCallbackMethod_list_operators() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status record_summ(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::testrpc::Variables>* /*reader*/, ::testrpc::OperatorsSummary* /*response*/) override {
+    ::grpc::Status list_operators(::grpc::ServerContext* /*context*/, const ::testrpc::Operator* /*request*/, ::grpc::ServerWriter< ::testrpc::Operator>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerReadReactor< ::testrpc::Variables>* record_summ(
+    virtual ::grpc::ServerWriteReactor< ::testrpc::Operator>* list_operators(
+      ::grpc::CallbackServerContext* /*context*/, const ::testrpc::Operator* /*request*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_record_result : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_record_result() {
+      ::grpc::Service::MarkMethodCallback(2,
+          new ::grpc::internal::CallbackClientStreamingHandler< ::testrpc::Variables, ::testrpc::OperatorsSummary>(
+            [this](
+                   ::grpc::CallbackServerContext* context, ::testrpc::OperatorsSummary* response) { return this->record_result(context, response); }));
+    }
+    ~WithCallbackMethod_record_result() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status record_result(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::testrpc::Variables>* /*reader*/, ::testrpc::OperatorsSummary* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerReadReactor< ::testrpc::Variables>* record_result(
       ::grpc::CallbackServerContext* /*context*/, ::testrpc::OperatorsSummary* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithCallbackMethod_summ_chat : public BaseClass {
+  class WithCallbackMethod_result_chat : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithCallbackMethod_summ_chat() {
-      ::grpc::Service::MarkMethodCallback(2,
+    WithCallbackMethod_result_chat() {
+      ::grpc::Service::MarkMethodCallback(3,
           new ::grpc::internal::CallbackBidiHandler< ::testrpc::SummNote, ::testrpc::SummNote>(
             [this](
-                   ::grpc::CallbackServerContext* context) { return this->summ_chat(context); }));
+                   ::grpc::CallbackServerContext* context) { return this->result_chat(context); }));
     }
-    ~WithCallbackMethod_summ_chat() override {
+    ~WithCallbackMethod_result_chat() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status summ_chat(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* /*stream*/)  override {
+    ::grpc::Status result_chat(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* /*stream*/)  override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerBidiReactor< ::testrpc::SummNote, ::testrpc::SummNote>* summ_chat(
+    virtual ::grpc::ServerBidiReactor< ::testrpc::SummNote, ::testrpc::SummNote>* result_chat(
       ::grpc::CallbackServerContext* /*context*/)
       { return nullptr; }
   };
-  typedef WithCallbackMethod_get_summ<WithCallbackMethod_record_summ<WithCallbackMethod_summ_chat<Service > > > CallbackService;
+  typedef WithCallbackMethod_get_result<WithCallbackMethod_list_operators<WithCallbackMethod_record_result<WithCallbackMethod_result_chat<Service > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
-  class WithGenericMethod_get_summ : public BaseClass {
+  class WithGenericMethod_get_result : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_get_summ() {
+    WithGenericMethod_get_result() {
       ::grpc::Service::MarkMethodGeneric(0);
     }
-    ~WithGenericMethod_get_summ() override {
+    ~WithGenericMethod_get_result() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status get_summ(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
+    ::grpc::Status get_result(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_record_summ : public BaseClass {
+  class WithGenericMethod_list_operators : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_record_summ() {
+    WithGenericMethod_list_operators() {
       ::grpc::Service::MarkMethodGeneric(1);
     }
-    ~WithGenericMethod_record_summ() override {
+    ~WithGenericMethod_list_operators() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status record_summ(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::testrpc::Variables>* /*reader*/, ::testrpc::OperatorsSummary* /*response*/) override {
+    ::grpc::Status list_operators(::grpc::ServerContext* /*context*/, const ::testrpc::Operator* /*request*/, ::grpc::ServerWriter< ::testrpc::Operator>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_summ_chat : public BaseClass {
+  class WithGenericMethod_record_result : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_summ_chat() {
+    WithGenericMethod_record_result() {
       ::grpc::Service::MarkMethodGeneric(2);
     }
-    ~WithGenericMethod_summ_chat() override {
+    ~WithGenericMethod_record_result() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status summ_chat(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* /*stream*/)  override {
+    ::grpc::Status record_result(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::testrpc::Variables>* /*reader*/, ::testrpc::OperatorsSummary* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithRawMethod_get_summ : public BaseClass {
+  class WithGenericMethod_result_chat : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_get_summ() {
-      ::grpc::Service::MarkMethodRaw(0);
+    WithGenericMethod_result_chat() {
+      ::grpc::Service::MarkMethodGeneric(3);
     }
-    ~WithRawMethod_get_summ() override {
+    ~WithGenericMethod_result_chat() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status get_summ(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
+    ::grpc::Status result_chat(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* /*stream*/)  override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void Requestget_summ(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+  };
+  template <class BaseClass>
+  class WithRawMethod_get_result : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_get_result() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_get_result() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status get_result(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void Requestget_result(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawMethod_record_summ : public BaseClass {
+  class WithRawMethod_list_operators : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_record_summ() {
+    WithRawMethod_list_operators() {
       ::grpc::Service::MarkMethodRaw(1);
     }
-    ~WithRawMethod_record_summ() override {
+    ~WithRawMethod_list_operators() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status record_summ(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::testrpc::Variables>* /*reader*/, ::testrpc::OperatorsSummary* /*response*/) override {
+    ::grpc::Status list_operators(::grpc::ServerContext* /*context*/, const ::testrpc::Operator* /*request*/, ::grpc::ServerWriter< ::testrpc::Operator>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void Requestrecord_summ(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncClientStreaming(1, context, reader, new_call_cq, notification_cq, tag);
+    void Requestlist_operators(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(1, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawMethod_summ_chat : public BaseClass {
+  class WithRawMethod_record_result : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_summ_chat() {
+    WithRawMethod_record_result() {
       ::grpc::Service::MarkMethodRaw(2);
     }
-    ~WithRawMethod_summ_chat() override {
+    ~WithRawMethod_record_result() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status summ_chat(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* /*stream*/)  override {
+    ::grpc::Status record_result(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::testrpc::Variables>* /*reader*/, ::testrpc::OperatorsSummary* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void Requestsumm_chat(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncBidiStreaming(2, context, stream, new_call_cq, notification_cq, tag);
+    void Requestrecord_result(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncClientStreaming(2, context, reader, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithRawCallbackMethod_get_summ : public BaseClass {
+  class WithRawMethod_result_chat : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawCallbackMethod_get_summ() {
+    WithRawMethod_result_chat() {
+      ::grpc::Service::MarkMethodRaw(3);
+    }
+    ~WithRawMethod_result_chat() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status result_chat(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void Requestresult_chat(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(3, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_get_result : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_get_result() {
       ::grpc::Service::MarkMethodRawCallback(0,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->get_summ(context, request, response); }));
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->get_result(context, request, response); }));
     }
-    ~WithRawCallbackMethod_get_summ() override {
+    ~WithRawCallbackMethod_get_result() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status get_summ(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
+    ::grpc::Status get_result(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* get_summ(
+    virtual ::grpc::ServerUnaryReactor* get_result(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithRawCallbackMethod_record_summ : public BaseClass {
+  class WithRawCallbackMethod_list_operators : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawCallbackMethod_record_summ() {
+    WithRawCallbackMethod_list_operators() {
       ::grpc::Service::MarkMethodRawCallback(1,
-          new ::grpc::internal::CallbackClientStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          new ::grpc::internal::CallbackServerStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context, ::grpc::ByteBuffer* response) { return this->record_summ(context, response); }));
+                   ::grpc::CallbackServerContext* context, const::grpc::ByteBuffer* request) { return this->list_operators(context, request); }));
     }
-    ~WithRawCallbackMethod_record_summ() override {
+    ~WithRawCallbackMethod_list_operators() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status record_summ(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::testrpc::Variables>* /*reader*/, ::testrpc::OperatorsSummary* /*response*/) override {
+    ::grpc::Status list_operators(::grpc::ServerContext* /*context*/, const ::testrpc::Operator* /*request*/, ::grpc::ServerWriter< ::testrpc::Operator>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerReadReactor< ::grpc::ByteBuffer>* record_summ(
+    virtual ::grpc::ServerWriteReactor< ::grpc::ByteBuffer>* list_operators(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_record_result : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_record_result() {
+      ::grpc::Service::MarkMethodRawCallback(2,
+          new ::grpc::internal::CallbackClientStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, ::grpc::ByteBuffer* response) { return this->record_result(context, response); }));
+    }
+    ~WithRawCallbackMethod_record_result() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status record_result(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::testrpc::Variables>* /*reader*/, ::testrpc::OperatorsSummary* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerReadReactor< ::grpc::ByteBuffer>* record_result(
       ::grpc::CallbackServerContext* /*context*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithRawCallbackMethod_summ_chat : public BaseClass {
+  class WithRawCallbackMethod_result_chat : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawCallbackMethod_summ_chat() {
-      ::grpc::Service::MarkMethodRawCallback(2,
+    WithRawCallbackMethod_result_chat() {
+      ::grpc::Service::MarkMethodRawCallback(3,
           new ::grpc::internal::CallbackBidiHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context) { return this->summ_chat(context); }));
+                   ::grpc::CallbackServerContext* context) { return this->result_chat(context); }));
     }
-    ~WithRawCallbackMethod_summ_chat() override {
+    ~WithRawCallbackMethod_result_chat() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status summ_chat(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* /*stream*/)  override {
+    ::grpc::Status result_chat(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::testrpc::SummNote, ::testrpc::SummNote>* /*stream*/)  override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* summ_chat(
+    virtual ::grpc::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* result_chat(
       ::grpc::CallbackServerContext* /*context*/)
       { return nullptr; }
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_get_summ : public BaseClass {
+  class WithStreamedUnaryMethod_get_result : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithStreamedUnaryMethod_get_summ() {
+    WithStreamedUnaryMethod_get_result() {
       ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::StreamedUnaryHandler<
           ::testrpc::Variables, ::testrpc::Operator>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
                      ::testrpc::Variables, ::testrpc::Operator>* streamer) {
-                       return this->Streamedget_summ(context,
+                       return this->Streamedget_result(context,
                          streamer);
                   }));
     }
-    ~WithStreamedUnaryMethod_get_summ() override {
+    ~WithStreamedUnaryMethod_get_result() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status get_summ(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
+    ::grpc::Status get_result(::grpc::ServerContext* /*context*/, const ::testrpc::Variables* /*request*/, ::testrpc::Operator* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status Streamedget_summ(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::testrpc::Variables,::testrpc::Operator>* server_unary_streamer) = 0;
+    virtual ::grpc::Status Streamedget_result(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::testrpc::Variables,::testrpc::Operator>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_get_summ<Service > StreamedUnaryService;
-  typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_get_summ<Service > StreamedService;
+  typedef WithStreamedUnaryMethod_get_result<Service > StreamedUnaryService;
+  template <class BaseClass>
+  class WithSplitStreamingMethod_list_operators : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithSplitStreamingMethod_list_operators() {
+      ::grpc::Service::MarkMethodStreamed(1,
+        new ::grpc::internal::SplitServerStreamingHandler<
+          ::testrpc::Operator, ::testrpc::Operator>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerSplitStreamer<
+                     ::testrpc::Operator, ::testrpc::Operator>* streamer) {
+                       return this->Streamedlist_operators(context,
+                         streamer);
+                  }));
+    }
+    ~WithSplitStreamingMethod_list_operators() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status list_operators(::grpc::ServerContext* /*context*/, const ::testrpc::Operator* /*request*/, ::grpc::ServerWriter< ::testrpc::Operator>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with split streamed
+    virtual ::grpc::Status Streamedlist_operators(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::testrpc::Operator,::testrpc::Operator>* server_split_streamer) = 0;
+  };
+  typedef WithSplitStreamingMethod_list_operators<Service > SplitStreamedService;
+  typedef WithStreamedUnaryMethod_get_result<WithSplitStreamingMethod_list_operators<Service > > StreamedService;
 };
 
 }  // namespace testrpc
