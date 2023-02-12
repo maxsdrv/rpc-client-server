@@ -36,11 +36,12 @@ int32_t calculate_operators(const Variables* v) {
     return v->value() + v->value_2();
 }
 
-std::string get_operator_name(const Action& action,
+std::string get_operator_name(Operator&& unit,
                               std::vector<Operator>& oper_list) {
     for (const auto& i : oper_list) {
 
     }
+    return "";
 }
 
 class TestRpcImpl final : public TestgRPC::Service {
@@ -50,8 +51,7 @@ public:
 	}
 	Status get_result(ServerContext* context, const Variables* var,
 			         Operator* unit) override {
-//        unit->set_name(unit->name());
-        std::cout << "Name: " << unit->name() << '\n';
+        unit->set_name(get_operator_name(std::move(*unit), operator_list));
 //        std::cout << "Value: " << var->value() << ' ' << var->value_2() << '\n';
 //        unit->mutable_action_()->CopyFrom(*var);
         return Status::OK;
