@@ -12,7 +12,7 @@
 #include <grpcpp/server_context.h>
 #include <JsonParser.h>
 #ifdef BAZEL_BUILD
-#include "grpc-test/protos/test_rpc.grpc.pb.h"
+#include "rpc-client-server/protos/test_rpc.grpc.pb.h"
 #else
 #include "test_rpc.grpc.pb.h"
 #endif
@@ -29,23 +29,18 @@ using testrpc::TestgRPC;
 using testrpc::SummNote;
 using testrpc::OperatorsSummary;
 using testrpc::Variables;
+using testrpc::Action;
 
 
-const Operator& calculate_operators(const Operator* op) {
-	 op->result().value() + op->result().value_2();
-	 return *op;
+int32_t calculate_operators(const Variables* v) {
+    return v->value() + v->value_2();
 }
 
-std::string get_operator_name(const Variables& var,
-						      const std::vector<Operator>& op_list) {
+std::string get_operator_name(const Action& action,
+                              std::vector<Operator>& oper_list) {
+    for (const auto& i : oper_list) {
 
-	for (const Operator& o : op_list) {
-		if (o.result().value() == var.value() &&
-			o.result().value_2() == var.value_2()) {
-			return o.name();
-		}
-	}
-	return "";
+    }
 }
 
 class TestRpcImpl final : public TestgRPC::Service {
@@ -54,20 +49,12 @@ public:
 		testrpc::parse_db(db, &operator_list);
 	}
 	Status get_result(ServerContext* context, const Variables* var,
-			        Addition* add) override {
-		add->set_name(get_operator_name(*var, operator_list));
-		add->mutable_result()->CopyFrom(*var);
-
-		return Status::OK;
-	}
-	Status list_operators(ServerContext* context,
-						  const Operator* v,
-						  ServerWriter<Operator>* writer) override {
-		for (auto& o : operator_list) {
-			v = &calculate_operators(&o);
-			writer->Write(*v);
-		}
-		return Status::OK;
+			         Operator* unit) override {
+//        unit->set_name(unit->name());
+        std::cout << "Name: " << unit->name() << '\n';
+//        std::cout << "Value: " << var->value() << ' ' << var->value_2() << '\n';
+//        unit->mutable_action_()->CopyFrom(*var);
+        return Status::OK;
 	}
 
 private:

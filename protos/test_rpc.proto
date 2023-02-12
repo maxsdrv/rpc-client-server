@@ -4,9 +4,7 @@ package testrpc;
 
 service TestgRPC {
 
-    rpc get_result(Variables) returns (Addition) {}
-
-    rpc list_operators(Operator) returns (stream Operator) {}
+    rpc get_result(Variables) returns (Operator) {}
 
     rpc record_result(stream Variables) returns (OperatorsSummary) {}
 
@@ -25,10 +23,12 @@ message Operator {
     string name = 1;
 
     //result summary
-    Addition addition_ = 2;
+    Action action_ = 2;
+
+    Variables items = 3;
 }
 
-message Addition {
+message Action {
     int32 result_ = 1;
 }
 

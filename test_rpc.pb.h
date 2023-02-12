@@ -45,9 +45,9 @@ struct TableStruct_test_5frpc_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_test_5frpc_2eproto;
 namespace testrpc {
-class Addition;
-struct AdditionDefaultTypeInternal;
-extern AdditionDefaultTypeInternal _Addition_default_instance_;
+class Action;
+struct ActionDefaultTypeInternal;
+extern ActionDefaultTypeInternal _Action_default_instance_;
 class Operator;
 struct OperatorDefaultTypeInternal;
 extern OperatorDefaultTypeInternal _Operator_default_instance_;
@@ -62,7 +62,7 @@ struct VariablesDefaultTypeInternal;
 extern VariablesDefaultTypeInternal _Variables_default_instance_;
 }  // namespace testrpc
 PROTOBUF_NAMESPACE_OPEN
-template<> ::testrpc::Addition* Arena::CreateMaybeMessage<::testrpc::Addition>(Arena*);
+template<> ::testrpc::Action* Arena::CreateMaybeMessage<::testrpc::Action>(Arena*);
 template<> ::testrpc::Operator* Arena::CreateMaybeMessage<::testrpc::Operator>(Arena*);
 template<> ::testrpc::OperatorsSummary* Arena::CreateMaybeMessage<::testrpc::OperatorsSummary>(Arena*);
 template<> ::testrpc::SummNote* Arena::CreateMaybeMessage<::testrpc::SummNote>(Arena*);
@@ -353,7 +353,8 @@ class Operator final :
 
   enum : int {
     kNameFieldNumber = 1,
-    kAdditionFieldNumber = 2,
+    kActionFieldNumber = 2,
+    kItemsFieldNumber = 3,
   };
   // string name = 1;
   void clear_name();
@@ -369,23 +370,41 @@ class Operator final :
   std::string* _internal_mutable_name();
   public:
 
-  // .testrpc.Addition addition_ = 2;
-  bool has_addition_() const;
+  // .testrpc.Action action_ = 2;
+  bool has_action_() const;
   private:
-  bool _internal_has_addition_() const;
+  bool _internal_has_action_() const;
   public:
-  void clear_addition_();
-  const ::testrpc::Addition& addition_() const;
-  PROTOBUF_NODISCARD ::testrpc::Addition* release_addition_();
-  ::testrpc::Addition* mutable_addition_();
-  void set_allocated_addition_(::testrpc::Addition* addition_);
+  void clear_action_();
+  const ::testrpc::Action& action_() const;
+  PROTOBUF_NODISCARD ::testrpc::Action* release_action_();
+  ::testrpc::Action* mutable_action_();
+  void set_allocated_action_(::testrpc::Action* action_);
   private:
-  const ::testrpc::Addition& _internal_addition_() const;
-  ::testrpc::Addition* _internal_mutable_addition_();
+  const ::testrpc::Action& _internal_action_() const;
+  ::testrpc::Action* _internal_mutable_action_();
   public:
-  void unsafe_arena_set_allocated_addition_(
-      ::testrpc::Addition* addition_);
-  ::testrpc::Addition* unsafe_arena_release_addition_();
+  void unsafe_arena_set_allocated_action_(
+      ::testrpc::Action* action_);
+  ::testrpc::Action* unsafe_arena_release_action_();
+
+  // .testrpc.Variables items = 3;
+  bool has_items() const;
+  private:
+  bool _internal_has_items() const;
+  public:
+  void clear_items();
+  const ::testrpc::Variables& items() const;
+  PROTOBUF_NODISCARD ::testrpc::Variables* release_items();
+  ::testrpc::Variables* mutable_items();
+  void set_allocated_items(::testrpc::Variables* items);
+  private:
+  const ::testrpc::Variables& _internal_items() const;
+  ::testrpc::Variables* _internal_mutable_items();
+  public:
+  void unsafe_arena_set_allocated_items(
+      ::testrpc::Variables* items);
+  ::testrpc::Variables* unsafe_arena_release_items();
 
   // @@protoc_insertion_point(class_scope:testrpc.Operator)
  private:
@@ -396,7 +415,8 @@ class Operator final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::testrpc::Addition* addition__;
+    ::testrpc::Action* action__;
+    ::testrpc::Variables* items_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -404,24 +424,24 @@ class Operator final :
 };
 // -------------------------------------------------------------------
 
-class Addition final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:testrpc.Addition) */ {
+class Action final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:testrpc.Action) */ {
  public:
-  inline Addition() : Addition(nullptr) {}
-  ~Addition() override;
-  explicit PROTOBUF_CONSTEXPR Addition(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline Action() : Action(nullptr) {}
+  ~Action() override;
+  explicit PROTOBUF_CONSTEXPR Action(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Addition(const Addition& from);
-  Addition(Addition&& from) noexcept
-    : Addition() {
+  Action(const Action& from);
+  Action(Action&& from) noexcept
+    : Action() {
     *this = ::std::move(from);
   }
 
-  inline Addition& operator=(const Addition& from) {
+  inline Action& operator=(const Action& from) {
     CopyFrom(from);
     return *this;
   }
-  inline Addition& operator=(Addition&& from) noexcept {
+  inline Action& operator=(Action&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -444,20 +464,20 @@ class Addition final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const Addition& default_instance() {
+  static const Action& default_instance() {
     return *internal_default_instance();
   }
-  static inline const Addition* internal_default_instance() {
-    return reinterpret_cast<const Addition*>(
-               &_Addition_default_instance_);
+  static inline const Action* internal_default_instance() {
+    return reinterpret_cast<const Action*>(
+               &_Action_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     2;
 
-  friend void swap(Addition& a, Addition& b) {
+  friend void swap(Action& a, Action& b) {
     a.Swap(&b);
   }
-  inline void Swap(Addition* other) {
+  inline void Swap(Action* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -470,7 +490,7 @@ class Addition final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(Addition* other) {
+  void UnsafeArenaSwap(Action* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -478,14 +498,14 @@ class Addition final :
 
   // implements Message ----------------------------------------------
 
-  Addition* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Addition>(arena);
+  Action* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<Action>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Addition& from);
+  void CopyFrom(const Action& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Addition& from) {
-    Addition::MergeImpl(*this, from);
+  void MergeFrom( const Action& from) {
+    Action::MergeImpl(*this, from);
   }
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
@@ -503,15 +523,15 @@ class Addition final :
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(Addition* other);
+  void InternalSwap(Action* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "testrpc.Addition";
+    return "testrpc.Action";
   }
   protected:
-  explicit Addition(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit Action(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -536,7 +556,7 @@ class Addition final :
   void _internal_set_result_(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:testrpc.Addition)
+  // @@protoc_insertion_point(class_scope:testrpc.Action)
  private:
   class _Internal;
 
@@ -998,45 +1018,45 @@ inline void Operator::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:testrpc.Operator.name)
 }
 
-// .testrpc.Addition addition_ = 2;
-inline bool Operator::_internal_has_addition_() const {
-  return this != internal_default_instance() && _impl_.addition__ != nullptr;
+// .testrpc.Action action_ = 2;
+inline bool Operator::_internal_has_action_() const {
+  return this != internal_default_instance() && _impl_.action__ != nullptr;
 }
-inline bool Operator::has_addition_() const {
-  return _internal_has_addition_();
+inline bool Operator::has_action_() const {
+  return _internal_has_action_();
 }
-inline void Operator::clear_addition_() {
-  if (GetArenaForAllocation() == nullptr && _impl_.addition__ != nullptr) {
-    delete _impl_.addition__;
+inline void Operator::clear_action_() {
+  if (GetArenaForAllocation() == nullptr && _impl_.action__ != nullptr) {
+    delete _impl_.action__;
   }
-  _impl_.addition__ = nullptr;
+  _impl_.action__ = nullptr;
 }
-inline const ::testrpc::Addition& Operator::_internal_addition_() const {
-  const ::testrpc::Addition* p = _impl_.addition__;
-  return p != nullptr ? *p : reinterpret_cast<const ::testrpc::Addition&>(
-      ::testrpc::_Addition_default_instance_);
+inline const ::testrpc::Action& Operator::_internal_action_() const {
+  const ::testrpc::Action* p = _impl_.action__;
+  return p != nullptr ? *p : reinterpret_cast<const ::testrpc::Action&>(
+      ::testrpc::_Action_default_instance_);
 }
-inline const ::testrpc::Addition& Operator::addition_() const {
-  // @@protoc_insertion_point(field_get:testrpc.Operator.addition_)
-  return _internal_addition_();
+inline const ::testrpc::Action& Operator::action_() const {
+  // @@protoc_insertion_point(field_get:testrpc.Operator.action_)
+  return _internal_action_();
 }
-inline void Operator::unsafe_arena_set_allocated_addition_(
-    ::testrpc::Addition* addition_) {
+inline void Operator::unsafe_arena_set_allocated_action_(
+    ::testrpc::Action* action_) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.addition__);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.action__);
   }
-  _impl_.addition__ = addition_;
-  if (addition_) {
+  _impl_.action__ = action_;
+  if (action_) {
     
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:testrpc.Operator.addition_)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:testrpc.Operator.action_)
 }
-inline ::testrpc::Addition* Operator::release_addition_() {
+inline ::testrpc::Action* Operator::release_action_() {
   
-  ::testrpc::Addition* temp = _impl_.addition__;
-  _impl_.addition__ = nullptr;
+  ::testrpc::Action* temp = _impl_.action__;
+  _impl_.action__ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
@@ -1048,68 +1068,158 @@ inline ::testrpc::Addition* Operator::release_addition_() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::testrpc::Addition* Operator::unsafe_arena_release_addition_() {
-  // @@protoc_insertion_point(field_release:testrpc.Operator.addition_)
+inline ::testrpc::Action* Operator::unsafe_arena_release_action_() {
+  // @@protoc_insertion_point(field_release:testrpc.Operator.action_)
   
-  ::testrpc::Addition* temp = _impl_.addition__;
-  _impl_.addition__ = nullptr;
+  ::testrpc::Action* temp = _impl_.action__;
+  _impl_.action__ = nullptr;
   return temp;
 }
-inline ::testrpc::Addition* Operator::_internal_mutable_addition_() {
+inline ::testrpc::Action* Operator::_internal_mutable_action_() {
   
-  if (_impl_.addition__ == nullptr) {
-    auto* p = CreateMaybeMessage<::testrpc::Addition>(GetArenaForAllocation());
-    _impl_.addition__ = p;
+  if (_impl_.action__ == nullptr) {
+    auto* p = CreateMaybeMessage<::testrpc::Action>(GetArenaForAllocation());
+    _impl_.action__ = p;
   }
-  return _impl_.addition__;
+  return _impl_.action__;
 }
-inline ::testrpc::Addition* Operator::mutable_addition_() {
-  ::testrpc::Addition* _msg = _internal_mutable_addition_();
-  // @@protoc_insertion_point(field_mutable:testrpc.Operator.addition_)
+inline ::testrpc::Action* Operator::mutable_action_() {
+  ::testrpc::Action* _msg = _internal_mutable_action_();
+  // @@protoc_insertion_point(field_mutable:testrpc.Operator.action_)
   return _msg;
 }
-inline void Operator::set_allocated_addition_(::testrpc::Addition* addition_) {
+inline void Operator::set_allocated_action_(::testrpc::Action* action_) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
-    delete _impl_.addition__;
+    delete _impl_.action__;
   }
-  if (addition_) {
+  if (action_) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(addition_);
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(action_);
     if (message_arena != submessage_arena) {
-      addition_ = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, addition_, submessage_arena);
+      action_ = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, action_, submessage_arena);
     }
     
   } else {
     
   }
-  _impl_.addition__ = addition_;
-  // @@protoc_insertion_point(field_set_allocated:testrpc.Operator.addition_)
+  _impl_.action__ = action_;
+  // @@protoc_insertion_point(field_set_allocated:testrpc.Operator.action_)
+}
+
+// .testrpc.Variables items = 3;
+inline bool Operator::_internal_has_items() const {
+  return this != internal_default_instance() && _impl_.items_ != nullptr;
+}
+inline bool Operator::has_items() const {
+  return _internal_has_items();
+}
+inline void Operator::clear_items() {
+  if (GetArenaForAllocation() == nullptr && _impl_.items_ != nullptr) {
+    delete _impl_.items_;
+  }
+  _impl_.items_ = nullptr;
+}
+inline const ::testrpc::Variables& Operator::_internal_items() const {
+  const ::testrpc::Variables* p = _impl_.items_;
+  return p != nullptr ? *p : reinterpret_cast<const ::testrpc::Variables&>(
+      ::testrpc::_Variables_default_instance_);
+}
+inline const ::testrpc::Variables& Operator::items() const {
+  // @@protoc_insertion_point(field_get:testrpc.Operator.items)
+  return _internal_items();
+}
+inline void Operator::unsafe_arena_set_allocated_items(
+    ::testrpc::Variables* items) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.items_);
+  }
+  _impl_.items_ = items;
+  if (items) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:testrpc.Operator.items)
+}
+inline ::testrpc::Variables* Operator::release_items() {
+  
+  ::testrpc::Variables* temp = _impl_.items_;
+  _impl_.items_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::testrpc::Variables* Operator::unsafe_arena_release_items() {
+  // @@protoc_insertion_point(field_release:testrpc.Operator.items)
+  
+  ::testrpc::Variables* temp = _impl_.items_;
+  _impl_.items_ = nullptr;
+  return temp;
+}
+inline ::testrpc::Variables* Operator::_internal_mutable_items() {
+  
+  if (_impl_.items_ == nullptr) {
+    auto* p = CreateMaybeMessage<::testrpc::Variables>(GetArenaForAllocation());
+    _impl_.items_ = p;
+  }
+  return _impl_.items_;
+}
+inline ::testrpc::Variables* Operator::mutable_items() {
+  ::testrpc::Variables* _msg = _internal_mutable_items();
+  // @@protoc_insertion_point(field_mutable:testrpc.Operator.items)
+  return _msg;
+}
+inline void Operator::set_allocated_items(::testrpc::Variables* items) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.items_;
+  }
+  if (items) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(items);
+    if (message_arena != submessage_arena) {
+      items = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, items, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.items_ = items;
+  // @@protoc_insertion_point(field_set_allocated:testrpc.Operator.items)
 }
 
 // -------------------------------------------------------------------
 
-// Addition
+// Action
 
 // int32 result_ = 1;
-inline void Addition::clear_result_() {
+inline void Action::clear_result_() {
   _impl_.result__ = 0;
 }
-inline int32_t Addition::_internal_result_() const {
+inline int32_t Action::_internal_result_() const {
   return _impl_.result__;
 }
-inline int32_t Addition::result_() const {
-  // @@protoc_insertion_point(field_get:testrpc.Addition.result_)
+inline int32_t Action::result_() const {
+  // @@protoc_insertion_point(field_get:testrpc.Action.result_)
   return _internal_result_();
 }
-inline void Addition::_internal_set_result_(int32_t value) {
+inline void Action::_internal_set_result_(int32_t value) {
   
   _impl_.result__ = value;
 }
-inline void Addition::set_result_(int32_t value) {
+inline void Action::set_result_(int32_t value) {
   _internal_set_result_(value);
-  // @@protoc_insertion_point(field_set:testrpc.Addition.result_)
+  // @@protoc_insertion_point(field_set:testrpc.Action.result_)
 }
 
 // -------------------------------------------------------------------

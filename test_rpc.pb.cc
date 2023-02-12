@@ -38,7 +38,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR Operator::Operator(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.addition__)*/nullptr
+  , /*decltype(_impl_.action__)*/nullptr
+  , /*decltype(_impl_.items_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct OperatorDefaultTypeInternal {
   PROTOBUF_CONSTEXPR OperatorDefaultTypeInternal()
@@ -49,19 +50,19 @@ struct OperatorDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 OperatorDefaultTypeInternal _Operator_default_instance_;
-PROTOBUF_CONSTEXPR Addition::Addition(
+PROTOBUF_CONSTEXPR Action::Action(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.result__)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
-struct AdditionDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR AdditionDefaultTypeInternal()
+struct ActionDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ActionDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
-  ~AdditionDefaultTypeInternal() {}
+  ~ActionDefaultTypeInternal() {}
   union {
-    Addition _instance;
+    Action _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AdditionDefaultTypeInternal _Addition_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ActionDefaultTypeInternal _Action_default_instance_;
 PROTOBUF_CONSTEXPR SummNote::SummNote(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.message_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
@@ -112,14 +113,15 @@ const uint32_t TableStruct_test_5frpc_2eproto::offsets[] PROTOBUF_SECTION_VARIAB
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::testrpc::Operator, _impl_.name_),
-  PROTOBUF_FIELD_OFFSET(::testrpc::Operator, _impl_.addition__),
+  PROTOBUF_FIELD_OFFSET(::testrpc::Operator, _impl_.action__),
+  PROTOBUF_FIELD_OFFSET(::testrpc::Operator, _impl_.items_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::testrpc::Addition, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::testrpc::Action, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::testrpc::Addition, _impl_.result__),
+  PROTOBUF_FIELD_OFFSET(::testrpc::Action, _impl_.result__),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::testrpc::SummNote, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -141,39 +143,38 @@ const uint32_t TableStruct_test_5frpc_2eproto::offsets[] PROTOBUF_SECTION_VARIAB
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::testrpc::Variables)},
   { 8, -1, -1, sizeof(::testrpc::Operator)},
-  { 16, -1, -1, sizeof(::testrpc::Addition)},
-  { 23, -1, -1, sizeof(::testrpc::SummNote)},
-  { 31, -1, -1, sizeof(::testrpc::OperatorsSummary)},
+  { 17, -1, -1, sizeof(::testrpc::Action)},
+  { 24, -1, -1, sizeof(::testrpc::SummNote)},
+  { 32, -1, -1, sizeof(::testrpc::OperatorsSummary)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::testrpc::_Variables_default_instance_._instance,
   &::testrpc::_Operator_default_instance_._instance,
-  &::testrpc::_Addition_default_instance_._instance,
+  &::testrpc::_Action_default_instance_._instance,
   &::testrpc::_SummNote_default_instance_._instance,
   &::testrpc::_OperatorsSummary_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_test_5frpc_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\016test_rpc.proto\022\007testrpc\"+\n\tVariables\022\r"
-  "\n\005value\030\001 \001(\005\022\017\n\007value_2\030\002 \001(\005\">\n\010Operat"
-  "or\022\014\n\004name\030\001 \001(\t\022$\n\taddition_\030\002 \001(\0132\021.te"
-  "strpc.Addition\"\033\n\010Addition\022\017\n\007result_\030\001 "
-  "\001(\005\"F\n\010SummNote\022)\n\rtype_operator\030\001 \001(\0132\022"
-  ".testrpc.Variables\022\017\n\007message\030\002 \001(\t\"X\n\020O"
-  "peratorsSummary\022\027\n\017variables_count\030\001 \001(\005"
-  "\022\025\n\rfeature_count\030\002 \001(\005\022\024\n\014elapsed_time\030"
-  "\003 \001(\0052\374\001\n\010TestgRPC\0225\n\nget_result\022\022.testr"
-  "pc.Variables\032\021.testrpc.Operator\"\000\022:\n\016lis"
-  "t_operators\022\021.testrpc.Operator\032\021.testrpc"
-  ".Operator\"\0000\001\022B\n\rrecord_result\022\022.testrpc"
-  ".Variables\032\031.testrpc.OperatorsSummary\"\000("
-  "\001\0229\n\013result_chat\022\021.testrpc.SummNote\032\021.te"
-  "strpc.SummNote\"\000(\0010\001b\006proto3"
+  "\n\005value\030\001 \001(\005\022\017\n\007value_2\030\002 \001(\005\"]\n\010Operat"
+  "or\022\014\n\004name\030\001 \001(\t\022 \n\007action_\030\002 \001(\0132\017.test"
+  "rpc.Action\022!\n\005items\030\003 \001(\0132\022.testrpc.Vari"
+  "ables\"\031\n\006Action\022\017\n\007result_\030\001 \001(\005\"F\n\010Summ"
+  "Note\022)\n\rtype_operator\030\001 \001(\0132\022.testrpc.Va"
+  "riables\022\017\n\007message\030\002 \001(\t\"X\n\020OperatorsSum"
+  "mary\022\027\n\017variables_count\030\001 \001(\005\022\025\n\rfeature"
+  "_count\030\002 \001(\005\022\024\n\014elapsed_time\030\003 \001(\0052\300\001\n\010T"
+  "estgRPC\0225\n\nget_result\022\022.testrpc.Variable"
+  "s\032\021.testrpc.Operator\"\000\022B\n\rrecord_result\022"
+  "\022.testrpc.Variables\032\031.testrpc.OperatorsS"
+  "ummary\"\000(\001\0229\n\013result_chat\022\021.testrpc.Summ"
+  "Note\032\021.testrpc.SummNote\"\000(\0010\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_test_5frpc_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_test_5frpc_2eproto = {
-    false, false, 588, descriptor_table_protodef_test_5frpc_2eproto,
+    false, false, 557, descriptor_table_protodef_test_5frpc_2eproto,
     "test_rpc.proto",
     &descriptor_table_test_5frpc_2eproto_once, nullptr, 0, 5,
     schemas, file_default_instances, TableStruct_test_5frpc_2eproto::offsets,
@@ -403,12 +404,17 @@ void Variables::InternalSwap(Variables* other) {
 
 class Operator::_Internal {
  public:
-  static const ::testrpc::Addition& addition_(const Operator* msg);
+  static const ::testrpc::Action& action_(const Operator* msg);
+  static const ::testrpc::Variables& items(const Operator* msg);
 };
 
-const ::testrpc::Addition&
-Operator::_Internal::addition_(const Operator* msg) {
-  return *msg->_impl_.addition__;
+const ::testrpc::Action&
+Operator::_Internal::action_(const Operator* msg) {
+  return *msg->_impl_.action__;
+}
+const ::testrpc::Variables&
+Operator::_Internal::items(const Operator* msg) {
+  return *msg->_impl_.items_;
 }
 Operator::Operator(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -421,7 +427,8 @@ Operator::Operator(const Operator& from)
   Operator* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
-    , decltype(_impl_.addition__){nullptr}
+    , decltype(_impl_.action__){nullptr}
+    , decltype(_impl_.items_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -433,8 +440,11 @@ Operator::Operator(const Operator& from)
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
-  if (from._internal_has_addition_()) {
-    _this->_impl_.addition__ = new ::testrpc::Addition(*from._impl_.addition__);
+  if (from._internal_has_action_()) {
+    _this->_impl_.action__ = new ::testrpc::Action(*from._impl_.action__);
+  }
+  if (from._internal_has_items()) {
+    _this->_impl_.items_ = new ::testrpc::Variables(*from._impl_.items_);
   }
   // @@protoc_insertion_point(copy_constructor:testrpc.Operator)
 }
@@ -445,7 +455,8 @@ inline void Operator::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
-    , decltype(_impl_.addition__){nullptr}
+    , decltype(_impl_.action__){nullptr}
+    , decltype(_impl_.items_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
@@ -466,7 +477,8 @@ Operator::~Operator() {
 inline void Operator::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.name_.Destroy();
-  if (this != internal_default_instance()) delete _impl_.addition__;
+  if (this != internal_default_instance()) delete _impl_.action__;
+  if (this != internal_default_instance()) delete _impl_.items_;
 }
 
 void Operator::SetCachedSize(int size) const {
@@ -480,10 +492,14 @@ void Operator::Clear() {
   (void) cached_has_bits;
 
   _impl_.name_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.addition__ != nullptr) {
-    delete _impl_.addition__;
+  if (GetArenaForAllocation() == nullptr && _impl_.action__ != nullptr) {
+    delete _impl_.action__;
   }
-  _impl_.addition__ = nullptr;
+  _impl_.action__ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.items_ != nullptr) {
+    delete _impl_.items_;
+  }
+  _impl_.items_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -503,10 +519,18 @@ const char* Operator::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx)
         } else
           goto handle_unusual;
         continue;
-      // .testrpc.Addition addition_ = 2;
+      // .testrpc.Action action_ = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
-          ptr = ctx->ParseMessage(_internal_mutable_addition_(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_action_(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .testrpc.Variables items = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          ptr = ctx->ParseMessage(_internal_mutable_items(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -550,11 +574,18 @@ uint8_t* Operator::_InternalSerialize(
         1, this->_internal_name(), target);
   }
 
-  // .testrpc.Addition addition_ = 2;
-  if (this->_internal_has_addition_()) {
+  // .testrpc.Action action_ = 2;
+  if (this->_internal_has_action_()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(2, _Internal::addition_(this),
-        _Internal::addition_(this).GetCachedSize(), target, stream);
+      InternalWriteMessage(2, _Internal::action_(this),
+        _Internal::action_(this).GetCachedSize(), target, stream);
+  }
+
+  // .testrpc.Variables items = 3;
+  if (this->_internal_has_items()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(3, _Internal::items(this),
+        _Internal::items(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -580,11 +611,18 @@ size_t Operator::ByteSizeLong() const {
         this->_internal_name());
   }
 
-  // .testrpc.Addition addition_ = 2;
-  if (this->_internal_has_addition_()) {
+  // .testrpc.Action action_ = 2;
+  if (this->_internal_has_action_()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.addition__);
+        *_impl_.action__);
+  }
+
+  // .testrpc.Variables items = 3;
+  if (this->_internal_has_items()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.items_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -608,9 +646,13 @@ void Operator::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTO
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
   }
-  if (from._internal_has_addition_()) {
-    _this->_internal_mutable_addition_()->::testrpc::Addition::MergeFrom(
-        from._internal_addition_());
+  if (from._internal_has_action_()) {
+    _this->_internal_mutable_action_()->::testrpc::Action::MergeFrom(
+        from._internal_action_());
+  }
+  if (from._internal_has_items()) {
+    _this->_internal_mutable_items()->::testrpc::Variables::MergeFrom(
+        from._internal_items());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -635,7 +677,12 @@ void Operator::InternalSwap(Operator* other) {
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
   );
-  swap(_impl_.addition__, other->_impl_.addition__);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Operator, _impl_.items_)
+      + sizeof(Operator::_impl_.items_)
+      - PROTOBUF_FIELD_OFFSET(Operator, _impl_.action__)>(
+          reinterpret_cast<char*>(&_impl_.action__),
+          reinterpret_cast<char*>(&other->_impl_.action__));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Operator::GetMetadata() const {
@@ -646,29 +693,29 @@ void Operator::InternalSwap(Operator* other) {
 
 // ===================================================================
 
-class Addition::_Internal {
+class Action::_Internal {
  public:
 };
 
-Addition::Addition(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+Action::Action(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:testrpc.Addition)
+  // @@protoc_insertion_point(arena_constructor:testrpc.Action)
 }
-Addition::Addition(const Addition& from)
+Action::Action(const Action& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  Addition* const _this = this; (void)_this;
+  Action* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.result__){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.result__ = from._impl_.result__;
-  // @@protoc_insertion_point(copy_constructor:testrpc.Addition)
+  // @@protoc_insertion_point(copy_constructor:testrpc.Action)
 }
 
-inline void Addition::SharedCtor(
+inline void Action::SharedCtor(
     ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
@@ -678,8 +725,8 @@ inline void Addition::SharedCtor(
   };
 }
 
-Addition::~Addition() {
-  // @@protoc_insertion_point(destructor:testrpc.Addition)
+Action::~Action() {
+  // @@protoc_insertion_point(destructor:testrpc.Action)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -687,16 +734,16 @@ Addition::~Addition() {
   SharedDtor();
 }
 
-inline void Addition::SharedDtor() {
+inline void Action::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
 }
 
-void Addition::SetCachedSize(int size) const {
+void Action::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void Addition::Clear() {
-// @@protoc_insertion_point(message_clear_start:testrpc.Addition)
+void Action::Clear() {
+// @@protoc_insertion_point(message_clear_start:testrpc.Action)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -705,7 +752,7 @@ void Addition::Clear() {
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* Addition::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* Action::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
@@ -742,9 +789,9 @@ failure:
 #undef CHK_
 }
 
-uint8_t* Addition::_InternalSerialize(
+uint8_t* Action::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:testrpc.Addition)
+  // @@protoc_insertion_point(serialize_to_array_start:testrpc.Action)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -758,12 +805,12 @@ uint8_t* Addition::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:testrpc.Addition)
+  // @@protoc_insertion_point(serialize_to_array_end:testrpc.Action)
   return target;
 }
 
-size_t Addition::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:testrpc.Addition)
+size_t Action::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:testrpc.Action)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -778,17 +825,17 @@ size_t Addition::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Addition::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Action::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    Addition::MergeImpl
+    Action::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Addition::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Action::GetClassData() const { return &_class_data_; }
 
 
-void Addition::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<Addition*>(&to_msg);
-  auto& from = static_cast<const Addition&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:testrpc.Addition)
+void Action::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<Action*>(&to_msg);
+  auto& from = static_cast<const Action&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:testrpc.Action)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -799,24 +846,24 @@ void Addition::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTO
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void Addition::CopyFrom(const Addition& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:testrpc.Addition)
+void Action::CopyFrom(const Action& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:testrpc.Action)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Addition::IsInitialized() const {
+bool Action::IsInitialized() const {
   return true;
 }
 
-void Addition::InternalSwap(Addition* other) {
+void Action::InternalSwap(Action* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_.result__, other->_impl_.result__);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata Addition::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata Action::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_test_5frpc_2eproto_getter, &descriptor_table_test_5frpc_2eproto_once,
       file_level_metadata_test_5frpc_2eproto[2]);
@@ -1313,9 +1360,9 @@ template<> PROTOBUF_NOINLINE ::testrpc::Operator*
 Arena::CreateMaybeMessage< ::testrpc::Operator >(Arena* arena) {
   return Arena::CreateMessageInternal< ::testrpc::Operator >(arena);
 }
-template<> PROTOBUF_NOINLINE ::testrpc::Addition*
-Arena::CreateMaybeMessage< ::testrpc::Addition >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::testrpc::Addition >(arena);
+template<> PROTOBUF_NOINLINE ::testrpc::Action*
+Arena::CreateMaybeMessage< ::testrpc::Action >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::testrpc::Action >(arena);
 }
 template<> PROTOBUF_NOINLINE ::testrpc::SummNote*
 Arena::CreateMaybeMessage< ::testrpc::SummNote >(Arena* arena) {

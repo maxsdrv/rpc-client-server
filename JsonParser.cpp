@@ -53,7 +53,7 @@ public:
 		}
 	}
 	bool finished() { return current_ >= db_.size(); }
-	bool try_parse_one(Operator* op) {
+	bool try_parse_one(Operator* i) {
 		if (failed_ || finished() || !match("{")) {
 			return set_failed_and_return_false();
 		}
@@ -62,12 +62,12 @@ public:
 		}
 		long temp = 0;
 		read_long(&temp);
-		op->mutable_result()->set_value(static_cast<int>(temp));
+		i->mutable_items()->set_value(static_cast<int>(temp));
 		if (!match(",") || !match(second_val)) {
 			return set_failed_and_return_false();
 		}
 		read_long(&temp);
-		op->mutable_result()->set_value_2(static_cast<int>(temp));
+		i->mutable_items()->set_value_2(static_cast<int>(temp));
 		if (!match("},") || !match(name_) || !match("\"")) {
 			return set_failed_and_return_false();
 		}
@@ -76,7 +76,7 @@ public:
 		if (current_ == db_.size()) {
 			return set_failed_and_return_false();
 		}
-		op->set_name(db_.substr(name_start, current_ - name_start - 1));
+		i->set_name(db_.substr(name_start, current_ - name_start - 1));
 		if (!match("},")) {
 			if (db_[current_ - 1] == ']' && current_ == db_.size()) {
 				return true;

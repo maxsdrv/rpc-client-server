@@ -23,7 +23,6 @@ namespace testrpc {
 
 static const char* TestgRPC_method_names[] = {
   "/testrpc.TestgRPC/get_result",
-  "/testrpc.TestgRPC/list_operators",
   "/testrpc.TestgRPC/record_result",
   "/testrpc.TestgRPC/result_chat",
 };
@@ -36,9 +35,8 @@ std::unique_ptr< TestgRPC::Stub> TestgRPC::NewStub(const std::shared_ptr< ::grpc
 
 TestgRPC::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
   : channel_(channel), rpcmethod_get_result_(TestgRPC_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_list_operators_(TestgRPC_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
-  , rpcmethod_record_result_(TestgRPC_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::CLIENT_STREAMING, channel)
-  , rpcmethod_result_chat_(TestgRPC_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
+  , rpcmethod_record_result_(TestgRPC_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::CLIENT_STREAMING, channel)
+  , rpcmethod_result_chat_(TestgRPC_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
   {}
 
 ::grpc::Status TestgRPC::Stub::get_result(::grpc::ClientContext* context, const ::testrpc::Variables& request, ::testrpc::Operator* response) {
@@ -62,22 +60,6 @@ void TestgRPC::Stub::async::get_result(::grpc::ClientContext* context, const ::t
     this->PrepareAsyncget_resultRaw(context, request, cq);
   result->StartCall();
   return result;
-}
-
-::grpc::ClientReader< ::testrpc::Operator>* TestgRPC::Stub::list_operatorsRaw(::grpc::ClientContext* context, const ::testrpc::Operator& request) {
-  return ::grpc::internal::ClientReaderFactory< ::testrpc::Operator>::Create(channel_.get(), rpcmethod_list_operators_, context, request);
-}
-
-void TestgRPC::Stub::async::list_operators(::grpc::ClientContext* context, const ::testrpc::Operator* request, ::grpc::ClientReadReactor< ::testrpc::Operator>* reactor) {
-  ::grpc::internal::ClientCallbackReaderFactory< ::testrpc::Operator>::Create(stub_->channel_.get(), stub_->rpcmethod_list_operators_, context, request, reactor);
-}
-
-::grpc::ClientAsyncReader< ::testrpc::Operator>* TestgRPC::Stub::Asynclist_operatorsRaw(::grpc::ClientContext* context, const ::testrpc::Operator& request, ::grpc::CompletionQueue* cq, void* tag) {
-  return ::grpc::internal::ClientAsyncReaderFactory< ::testrpc::Operator>::Create(channel_.get(), cq, rpcmethod_list_operators_, context, request, true, tag);
-}
-
-::grpc::ClientAsyncReader< ::testrpc::Operator>* TestgRPC::Stub::PrepareAsynclist_operatorsRaw(::grpc::ClientContext* context, const ::testrpc::Operator& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncReaderFactory< ::testrpc::Operator>::Create(channel_.get(), cq, rpcmethod_list_operators_, context, request, false, nullptr);
 }
 
 ::grpc::ClientWriter< ::testrpc::Variables>* TestgRPC::Stub::record_resultRaw(::grpc::ClientContext* context, ::testrpc::OperatorsSummary* response) {
@@ -125,16 +107,6 @@ TestgRPC::Service::Service() {
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       TestgRPC_method_names[1],
-      ::grpc::internal::RpcMethod::SERVER_STREAMING,
-      new ::grpc::internal::ServerStreamingHandler< TestgRPC::Service, ::testrpc::Operator, ::testrpc::Operator>(
-          [](TestgRPC::Service* service,
-             ::grpc::ServerContext* ctx,
-             const ::testrpc::Operator* req,
-             ::grpc::ServerWriter<::testrpc::Operator>* writer) {
-               return service->list_operators(ctx, req, writer);
-             }, this)));
-  AddMethod(new ::grpc::internal::RpcServiceMethod(
-      TestgRPC_method_names[2],
       ::grpc::internal::RpcMethod::CLIENT_STREAMING,
       new ::grpc::internal::ClientStreamingHandler< TestgRPC::Service, ::testrpc::Variables, ::testrpc::OperatorsSummary>(
           [](TestgRPC::Service* service,
@@ -144,7 +116,7 @@ TestgRPC::Service::Service() {
                return service->record_result(ctx, reader, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      TestgRPC_method_names[3],
+      TestgRPC_method_names[2],
       ::grpc::internal::RpcMethod::BIDI_STREAMING,
       new ::grpc::internal::BidiStreamingHandler< TestgRPC::Service, ::testrpc::SummNote, ::testrpc::SummNote>(
           [](TestgRPC::Service* service,
@@ -162,13 +134,6 @@ TestgRPC::Service::~Service() {
   (void) context;
   (void) request;
   (void) response;
-  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-}
-
-::grpc::Status TestgRPC::Service::list_operators(::grpc::ServerContext* context, const ::testrpc::Operator* request, ::grpc::ServerWriter< ::testrpc::Operator>* writer) {
-  (void) context;
-  (void) request;
-  (void) writer;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
