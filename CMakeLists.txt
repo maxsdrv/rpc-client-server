@@ -51,12 +51,14 @@ target_link_libraries(test_rpc_parser
     ${_REFLECTION}
     ${_GRPC_GRPCPP}
     ${_PROTOBUF_LIBPROTOBUF})
-
+set(others)
+list(APPEND other
+	profile.h)
 # Targets test_rpc(client|server)
 foreach(_target
         test_client test_server)
         add_executable(${_target}
-            "${_target}.cpp" )
+            "${_target}.cpp" "${other}" )
         target_link_libraries(${_target}
             tr_grpc_proto
             test_rpc_parser

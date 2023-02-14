@@ -243,7 +243,6 @@ class Operator final :
     : Operator() {
     *this = ::std::move(from);
   }
-
   inline Operator& operator=(const Operator& from) {
     CopyFrom(from);
     return *this;
