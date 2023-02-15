@@ -2,9 +2,13 @@ syntax = "proto3";
 
 package testrpc;
 
+import "google/protobuf/empty.proto";
+
 service TestgRPC {
 
-    rpc get_result(Variables) returns (Operator) {}
+    rpc get_json(google.protobuf.Empty) returns (ListOperators) {}	    	
+	
+    rpc get_result(google.protobuf.Empty) returns (Operator) {}
 
     rpc record_result(stream Variables) returns (OperatorsSummary) {}
 
@@ -12,10 +16,15 @@ service TestgRPC {
 
 }
 
+
 message Variables {
     // value for operators calculate
     int32 value = 1;
     int32 value_2 = 2;
+}
+
+message ListOperators {
+   repeated Operator operators = 1;
 }
 
 message Operator {
@@ -23,12 +32,12 @@ message Operator {
     string name = 1;
 
     //result summary
-    Action action_ = 2;
+    Response response_ = 2;
 
     Variables items = 3;
 }
 
-message Action {
+message Response {
     int32 result_ = 1;
 }
 
