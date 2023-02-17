@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtr_grpc_proto.a CMakeFiles/tr_grpc_proto.dir/tr_grpc_proto_autogen/mocs_compilation.cpp.o CMakeFiles/tr_grpc_proto.dir/test_rpc.grpc.pb.cc.o CMakeFiles/tr_grpc_proto.dir/test_rpc.pb.cc.o
+/usr/bin/ranlib libtr_grpc_proto.a

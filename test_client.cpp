@@ -1,9 +1,10 @@
 #include <chrono>
+#include <google/protobuf/empty.pb.h>
 #include <iostream>
 #include <memory>
 #include <random>
 #include <string>
-#include <thread>
+//#include <thread>
 #include <string_view>
 
 #include "JsonParser.h"
@@ -27,6 +28,8 @@ using testrpc::OperatorsSummary;
 using testrpc::SummNote;
 using testrpc::TestgRPC;
 using testrpc::Variables;
+using testrpc::ListOperators;
+using google::protobuf::Empty;
 
 Variables make_var(int32_t v1, int32_t v2) {
   Variables v;
@@ -44,28 +47,26 @@ public:
   }
   void get_operator() {
     Variables variables;
-    Operator op;
+    Operator list_op;
     variables = make_var(1000, 5000);
-    get_one_operator(variables, &op);
+    get_one_operator(variables, &list_op);
   }
 
 private:
-  bool get_one_operator(const Variables &var, Operator *op) {
+  bool get_one_operator(const Variables &var, Operator *list_op) {
     ClientContext context;
-    std::cout << "Check values: " << op->name() << " " << var.value() << " " << var.value_2()
-              << std::endl;
-    Status status = stub_->get_result(&context, var, op);
+
+    Status status = stub_->get_result(&context, Empty::default_instance(), list_op);
     if (!status.ok()) {
       std::cout << "get_result rpc failed. " << std::endl;
       return false;
     }
-    if (!op->has_action_()) {
+    if (!list_op->has_response_()) {
       std::cout << "Server return incomplete operator. " << std::endl;
       return false;
     } else {
-      std::cout << "Found operator called " << op->name() << " at "
-                << op->items().value() << ", " << op->items().value_2()
-                << std::endl;
+      std::cout << "Found operator called " << list_op->name() << " at "
+                << list_op->response_().result_() << std::endl;
     }
 
     return true;

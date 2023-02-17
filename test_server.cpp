@@ -5,6 +5,10 @@
 #include <numeric>
 #include <optional>
 #include <string>
+#include <memory>
+
+#include <QTcpServer>
+#include <QDebug>
 
 #include <grpc/grpc.h>
 #include <grpcpp/security/server_credentials.h>
@@ -28,37 +32,53 @@ using grpc::ServerReader;
 using grpc::ServerReaderWriter;
 using grpc::ServerWriter;
 using grpc::Status;
-using testrpc::Action;
 using testrpc::Operator;
 using testrpc::OperatorsSummary;
 using testrpc::SummNote;
 using testrpc::TestgRPC;
 using testrpc::Variables;
+using testrpc::ListOperators;
+using testrpc::Response;
+using google::protobuf::Empty;
 
-int32_t calculate_operators(const Variables *v) {
-  return v->value() + v->value_2();
+
+Response calculate_operators(const Variables *v) {
+  Response response;
+  response.set_result_(v->value() + v->value_2());
+  return response;
 }
 
-std::optional<Operator> get_operator_name(Operator* unit,
+std::optional<Operator> get_created_operator(Operator* unit,
                                           std::vector<Operator> &oper_list) {
 
-  LOG_DURATION("find_if");
-  
-    
+  LOG_DURATION("Free function get_operator_name()");
 
-  return {};
+  unit->set_name(oper_list.back().name());
+  auto res_calculate = calculate_operators(&oper_list.back().items());
+  unit->mutable_response_()->CopyFrom(res_calculate);
+	return *unit;
 }
 
-class TestRpcImpl final : public TestgRPC::Service {
+class TestRpcImpl : public QTcpServer {
+
 public:
+
   explicit TestRpcImpl(const std::string &db) {
     testrpc::parse_db(db, &operator_list);
   }
-  Status get_result(ServerContext *context, const Variables *var,
-                    Operator *unit) override {
+  Status get_result(ServerContext *context, const Empty* empty,
+                    Operator *unit){
 
     //TODO
+    auto ptr_unit = get_created_operator(unit, operator_list);
+    if (ptr_unit.has_value()) {
+      std::cout << "Unit has value!!!\n";
+    }
 
+    return Status::OK;
+  }
+  Status get_json(ServerContext* context, const Empty* empty, ListOperators* opr) {
+   
     return Status::OK;
   }
 
@@ -69,13 +89,7 @@ private:
 void run_server(const std::string &db_path) {
   std::string server_address("0.0.0.0:50051");
   TestRpcImpl impl(db_path);
-  ServerBuilder server_builder;
-  server_builder.AddListeningPort(server_address,
-                                  grpc::InsecureServerCredentials());
-  server_builder.RegisterService(&impl);
-  std::unique_ptr<Server> server(server_builder.BuildAndStart());
   std::cout << "Server listening on " << server_address << '\n';
-  server->Wait();
 }
 
 int main(int argc, char **argv) {

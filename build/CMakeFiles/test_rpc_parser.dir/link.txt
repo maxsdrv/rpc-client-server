@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtest_rpc_parser.a CMakeFiles/test_rpc_parser.dir/test_rpc_parser_autogen/mocs_compilation.cpp.o CMakeFiles/test_rpc_parser.dir/JsonParser.cpp.o
+/usr/bin/ranlib libtest_rpc_parser.a

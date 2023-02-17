@@ -1,0 +1,3 @@
+[submodule "qtprotobuf"]
+	path = qtprotobuf
+	url = https://github.com/semlanik/qtprotobuf.git

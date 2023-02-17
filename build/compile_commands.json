@@ -1,0 +1,37 @@
+[
+{
+  "directory": "/home/maxim/projects-okb44/aik/rpc-client-server/build",
+  "command": "/usr/bin/g++ -DCARES_STATICLIB -I/home/maxim/projects-okb44/aik/rpc-client-server/build/tr_grpc_proto_autogen/include -I/home/maxim/projects-okb44/aik/rpc-client-server -isystem /home/maxim/.local/include -g -std=gnu++17 -o CMakeFiles/tr_grpc_proto.dir/tr_grpc_proto_autogen/mocs_compilation.cpp.o -c /home/maxim/projects-okb44/aik/rpc-client-server/build/tr_grpc_proto_autogen/mocs_compilation.cpp",
+  "file": "/home/maxim/projects-okb44/aik/rpc-client-server/build/tr_grpc_proto_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/home/maxim/projects-okb44/aik/rpc-client-server/build",
+  "command": "/usr/bin/g++ -DCARES_STATICLIB -I/home/maxim/projects-okb44/aik/rpc-client-server/build/tr_grpc_proto_autogen/include -I/home/maxim/projects-okb44/aik/rpc-client-server -isystem /home/maxim/.local/include -g -std=gnu++17 -o CMakeFiles/tr_grpc_proto.dir/test_rpc.grpc.pb.cc.o -c /home/maxim/projects-okb44/aik/rpc-client-server/test_rpc.grpc.pb.cc",
+  "file": "/home/maxim/projects-okb44/aik/rpc-client-server/test_rpc.grpc.pb.cc"
+},
+{
+  "directory": "/home/maxim/projects-okb44/aik/rpc-client-server/build",
+  "command": "/usr/bin/g++ -DCARES_STATICLIB -I/home/maxim/projects-okb44/aik/rpc-client-server/build/tr_grpc_proto_autogen/include -I/home/maxim/projects-okb44/aik/rpc-client-server -isystem /home/maxim/.local/include -g -std=gnu++17 -o CMakeFiles/tr_grpc_proto.dir/test_rpc.pb.cc.o -c /home/maxim/projects-okb44/aik/rpc-client-server/test_rpc.pb.cc",
+  "file": "/home/maxim/projects-okb44/aik/rpc-client-server/test_rpc.pb.cc"
+},
+{
+  "directory": "/home/maxim/projects-okb44/aik/rpc-client-server/build",
+  "command": "/usr/bin/g++ -DCARES_STATICLIB -I/home/maxim/projects-okb44/aik/rpc-client-server/build/test_rpc_parser_autogen/include -I/home/maxim/projects-okb44/aik/rpc-client-server -isystem /home/maxim/.local/include -g -std=gnu++17 -o CMakeFiles/test_rpc_parser.dir/test_rpc_parser_autogen/mocs_compilation.cpp.o -c /home/maxim/projects-okb44/aik/rpc-client-server/build/test_rpc_parser_autogen/mocs_compilation.cpp",
+  "file": "/home/maxim/projects-okb44/aik/rpc-client-server/build/test_rpc_parser_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/home/maxim/projects-okb44/aik/rpc-client-server/build",
+  "command": "/usr/bin/g++ -DCARES_STATICLIB -I/home/maxim/projects-okb44/aik/rpc-client-server/build/test_rpc_parser_autogen/include -I/home/maxim/projects-okb44/aik/rpc-client-server -isystem /home/maxim/.local/include -g -std=gnu++17 -o CMakeFiles/test_rpc_parser.dir/JsonParser.cpp.o -c /home/maxim/projects-okb44/aik/rpc-client-server/JsonParser.cpp",
+  "file": "/home/maxim/projects-okb44/aik/rpc-client-server/JsonParser.cpp"
+},
+{
+  "directory": "/home/maxim/projects-okb44/aik/rpc-client-server/build",
+  "command": "/usr/bin/g++ -DCARES_STATICLIB -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_WIDGETS_LIB -I/home/maxim/projects-okb44/aik/rpc-client-server/build/TestgRPC_autogen/include -I/home/maxim/projects-okb44/aik/rpc-client-server -isystem /home/maxim/.local/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtConcurrent -g -fPIC -std=gnu++17 -o CMakeFiles/TestgRPC.dir/TestgRPC_autogen/mocs_compilation.cpp.o -c /home/maxim/projects-okb44/aik/rpc-client-server/build/TestgRPC_autogen/mocs_compilation.cpp",
+  "file": "/home/maxim/projects-okb44/aik/rpc-client-server/build/TestgRPC_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/home/maxim/projects-okb44/aik/rpc-client-server/build",
+  "command": "/usr/bin/g++ -DCARES_STATICLIB -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_WIDGETS_LIB -I/home/maxim/projects-okb44/aik/rpc-client-server/build/TestgRPC_autogen/include -I/home/maxim/projects-okb44/aik/rpc-client-server -isystem /home/maxim/.local/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtConcurrent -g -fPIC -std=gnu++17 -o CMakeFiles/TestgRPC.dir/ServerMKO.cpp.o -c /home/maxim/projects-okb44/aik/rpc-client-server/ServerMKO.cpp",
+  "file": "/home/maxim/projects-okb44/aik/rpc-client-server/ServerMKO.cpp"
+}
+]

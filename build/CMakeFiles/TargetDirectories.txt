@@ -1,0 +1,8 @@
+/home/maxim/projects-okb44/aik/rpc-client-server/build/CMakeFiles/tr_grpc_proto.dir
+/home/maxim/projects-okb44/aik/rpc-client-server/build/CMakeFiles/test_rpc_parser.dir
+/home/maxim/projects-okb44/aik/rpc-client-server/build/CMakeFiles/TestgRPC.dir
+/home/maxim/projects-okb44/aik/rpc-client-server/build/CMakeFiles/edit_cache.dir
+/home/maxim/projects-okb44/aik/rpc-client-server/build/CMakeFiles/rebuild_cache.dir
+/home/maxim/projects-okb44/aik/rpc-client-server/build/CMakeFiles/tr_grpc_proto_autogen.dir
+/home/maxim/projects-okb44/aik/rpc-client-server/build/CMakeFiles/test_rpc_parser_autogen.dir
+/home/maxim/projects-okb44/aik/rpc-client-server/build/CMakeFiles/TestgRPC_autogen.dir
