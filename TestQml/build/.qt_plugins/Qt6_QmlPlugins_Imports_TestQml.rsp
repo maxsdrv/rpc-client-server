@@ -1,8 +1,0 @@
--rootPath
-/home/maxim/Cpp/qt-projects/qml-lessons/TestQml
--cmake-output
--output-file
-/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build/.qt_plugins/Qt6_QmlPlugins_Imports_TestQml.cmake
--importPath
-/home/maxim/Qt/6.3.1/gcc_64/./qml
-/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build

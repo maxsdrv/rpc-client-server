@@ -1,0 +1,114 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Test",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Test::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Test-Debug-ded46037501cddc50a81.json",
+					"name" : "Test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Test_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Test_autogen-Debug-7a13d71337e1262b6c3f.json",
+					"name" : "Test_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Test_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Test_autogen_timestamp_deps-Debug-61c0f31ce809095c2d66.json",
+					"name" : "Test_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Test_qtprotobuf_gen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Test_qtprotobuf_gen-Debug-02ef9093fc1ee6abd842.json",
+					"name" : "Test_qtprotobuf_gen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Test_qtprotobuf_gen_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Test_qtprotobuf_gen_autogen-Debug-6002411b241240d28cb2.json",
+					"name" : "Test_qtprotobuf_gen_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Test_qtprotobuf_gen_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Test_qtprotobuf_gen_autogen_timestamp_deps-Debug-448e0a7b7f0e90f6ffe5.json",
+					"name" : "Test_qtprotobuf_gen_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Test_qtprotobuf_gen_deps_0::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Test_qtprotobuf_gen_deps_0-Debug-b27dcaf2caf624e616ef.json",
+					"name" : "Test_qtprotobuf_gen_deps_0",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/maxim/Cpp/qt-projects/qml-lessons/Test/build",
+		"source" : "/home/maxim/Cpp/qt-projects/qml-lessons/Test"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

@@ -1,6 +1,0 @@
-/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build/CMakeFiles/TestQml.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build/CMakeFiles/TestQml_qmlimportscan.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build/CMakeFiles/edit_cache.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build/CMakeFiles/rebuild_cache.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build/CMakeFiles/TestQml_autogen_timestamp_deps.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build/CMakeFiles/TestQml_autogen.dir

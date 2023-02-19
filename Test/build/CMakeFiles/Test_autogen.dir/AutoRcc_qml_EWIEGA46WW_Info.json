@@ -1,0 +1,19 @@
+{
+	"BUILD_DIR" : "/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/Test_autogen",
+	"CMAKE_BINARY_DIR" : "/home/maxim/Cpp/qt-projects/qml-lessons/Test/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/maxim/Cpp/qt-projects/qml-lessons/Test/build",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/maxim/Cpp/qt-projects/qml-lessons/Test",
+	"CMAKE_SOURCE_DIR" : "/home/maxim/Cpp/qt-projects/qml-lessons/Test",
+	"INCLUDE_DIR" : "/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/Test_autogen/include",
+	"INPUTS" : [ "/home/maxim/Cpp/qt-projects/qml-lessons/Test/main.qml" ],
+	"LOCK_FILE" : "/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/CMakeFiles/Test_autogen.dir/AutoRcc_qml_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "qml" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_qml.cpp",
+	"RCC_EXECUTABLE" : "/usr/lib/qt5/bin/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/CMakeFiles/Test_autogen.dir/AutoRcc_qml_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/home/maxim/Cpp/qt-projects/qml-lessons/Test/qml.qrc",
+	"VERBOSITY" : 0
+}

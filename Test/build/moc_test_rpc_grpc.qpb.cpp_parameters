@@ -1,0 +1,6 @@
+-I/home/maxim/Cpp/qt-projects/qml-lessons/Test
+-I/home/maxim/Cpp/qt-projects/qml-lessons/Test/build
+-DQT_PROTOBUF_STATIC
+-o
+/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/moc_test_rpc_grpc.qpb.cpp
+/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/test_rpc_grpc.qpb.h
