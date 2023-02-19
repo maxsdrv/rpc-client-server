@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package testrpc;
+package qtprotobuf.testrpc;
 
 message EchoRequest {
     string message = 1;

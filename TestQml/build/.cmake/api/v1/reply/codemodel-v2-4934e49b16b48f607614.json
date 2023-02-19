@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "TestQml",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "TestQml::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TestQml-Debug-42948723a4ca9182c3e9.json",
+					"name" : "TestQml",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TestQml_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TestQml_autogen-Debug-cf94f69a37e57b9d59c5.json",
+					"name" : "TestQml_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TestQml_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TestQml_autogen_timestamp_deps-Debug-c0db4d8d2f90c407679a.json",
+					"name" : "TestQml_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TestQml_qmlimportscan::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TestQml_qmlimportscan-Debug-6e91df1f4b359c531387.json",
+					"name" : "TestQml_qmlimportscan",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build",
+		"source" : "/home/maxim/Cpp/qt-projects/qml-lessons/TestQml"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

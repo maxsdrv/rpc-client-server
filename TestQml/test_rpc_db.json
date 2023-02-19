@@ -1,0 +1,29 @@
+[{
+    "values": {
+      "first": 5,
+      "second": 10
+    },
+    "name": "Addition"
+},
+  {
+    "values": {
+      "first": 230,
+      "second": 140
+    },
+    "name": "Subtraction"
+  },
+  {
+    "values": {
+      "first": 4,
+      "second": 5
+    },
+    "name": "Multiplication"
+  },
+  {
+    "values": {
+      "first": 20,
+      "second": 6
+    },
+    "name": "Division"
+  }
+]

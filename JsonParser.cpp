@@ -6,11 +6,6 @@
 #include <utility>
 #include <vector>
 #include <fstream>
-#ifdef BAZEL_BUILD
-#include "grpc-test/protos/test_rpc_grpc.pb.h"
-#else
-#include "test_rpc.grpc.pb.h"
-#endif
 
 #include "JsonParser.h"
 

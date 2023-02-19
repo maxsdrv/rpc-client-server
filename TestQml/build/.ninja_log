@@ -1,0 +1,13 @@
+# ninja log v5
+2	62	1676814814482812352	TestQml_autogen/timestamp	eb9f17ce69687973
+2	62	1676814814482812352	/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build/TestQml_autogen/timestamp	eb9f17ce69687973
+79	121	1676814814542811075	CMakeFiles/TestQml.dir/TestQml_autogen/EWIEGA46WW/qrc_qml.cpp.o	26fd468996be8955
+78	101	1676814814522811501	CMakeFiles/TestQml.dir/TestQml_autogen/mocs_compilation.cpp.o	37de895fc6210d7d
+2	62	1676814814482812352	TestQml_autogen/mocs_compilation.cpp	eb9f17ce69687973
+2	62	1676814814482812352	/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build/TestQml_autogen/mocs_compilation.cpp	eb9f17ce69687973
+63	78	1676812843436505919	TestQml_autogen/EWIEGA46WW/qrc_qml.cpp	1b1345df86477b9
+1	21	1676812658544304118	.qt_plugins/Qt6_QmlPlugins_Imports_TestQml.cmake	c022eb4baab347d8
+63	78	1676812843436505919	/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build/TestQml_autogen/EWIEGA46WW/qrc_qml.cpp	1b1345df86477b9
+1231	1489	1676814815906782044	TestQml	1c81236ab494d8d8
+78	1230	1676814815650787493	CMakeFiles/TestQml.dir/main.cpp.o	fe199d0a0be6cd2e
+1	21	1676812658544304118	/home/maxim/Cpp/qt-projects/qml-lessons/TestQml/build/.qt_plugins/Qt6_QmlPlugins_Imports_TestQml.cmake	c022eb4baab347d8
