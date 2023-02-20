@@ -1,9 +1,0 @@
-/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/CMakeFiles/Test.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/CMakeFiles/Test_qtprotobuf_gen_deps_0.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/CMakeFiles/Test_qtprotobuf_gen.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/CMakeFiles/edit_cache.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/CMakeFiles/rebuild_cache.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/CMakeFiles/Test_autogen_timestamp_deps.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/CMakeFiles/Test_autogen.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/CMakeFiles/Test_qtprotobuf_gen_autogen_timestamp_deps.dir
-/home/maxim/Cpp/qt-projects/qml-lessons/Test/build/CMakeFiles/Test_qtprotobuf_gen_autogen.dir

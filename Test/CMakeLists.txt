@@ -11,37 +11,59 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 REQUIRED COMPONENTS Core)
-find_package(Qt6  COMPONENTS REQUIRED Quick)
-find_package(QtProtobuf CONFIG REQUIRED COMPONENTS ProtobufGenerator Protobuf Grpc)
+# Path with QtProtobuf libraries
+set(CMAKE_PREFIX_PATH "/home/maxim/projects-okb44/aik/rpc-client-server/3rdPart/lib/cmake")
+
+# Function for compatibility Qt6 and Qt5 https://cmake.org/cmake/help/latest/prop_tgt/AUTOMOC.html
+function (add_qt5_server)
+    find_package(Qt5 REQUIRED QUIET COMPONENTS Core Quick)
+    set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+        PROPERTY Qt5Core_VERSION_MAJOR "${Qt5Core_VERSION_MAJOR}")
+    set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+            PROPERTY Qt5Core_VERSION_MINOR "${Qt5Core_VERSION_MAJOR}")
+endfunction()
+
+# QtProtobuf settings https://github.com/semlanik/qtprotobuf/blob/0.6/examples/clienttutorial/CMakeLists.txt
+set(CMAKE_POSITION_INDEPENDENT_CODE ${Qt5_POSITION_INDEPENDENT_CODE})
+set(QT_PROTOBUF_NAMESPACE QtProtobuf)
+if(NOT TARGET ${QT_PROTOBUF_NAMESPACE}::qtprotobufgen)
+    find_package(${QT_PROTOBUF_NAMESPACE} COMPONENTS ProtobufGenerator CONFIG REQUIRED)
+endif()
+if(NOT TARGET ${QT_PROTOBUF_NAMESPACE}::Protobuf)
+    find_package(${QT_PROTOBUF_NAMESPACE} COMPONENTS Protobuf CONFIG REQUIRED)
+endif()
+if(NOT TARGET ${QT_PROTOBUF_NAMESPACE}::Grpc)
+    find_package(${QT_PROTOBUF_NAMESPACE} COMPONENTS Grpc CONFIG REQUIRED)
+endif()
 
 set(PROJECT_SOURCES
-        ServerMKO.h
-        ServerMKO.cpp
+        ClientMKO.h
+        ClientMKO.cpp
         main.cpp
         qml.qrc
 )
+
 add_executable(Test
   ${PROJECT_SOURCES}
 )
+# Generate Protobuf files
+qtprotobuf_generate(TARGET Test PROTO_FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/test_rpc.proto" QML TRUE)
 
-qtprotobuf_generate(TARGET Test
-                     PROTO_FILES ${CMAKE_CURRENT_SOURCE_DIR}/test_rpc.proto QML TRUE)
-
+# For Qml requirements
 target_compile_definitions(Test
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+
+# Call compatibility function
+add_qt5_server()
+
+# Link libraries
 target_link_libraries(Test
   PRIVATE
-  Qt5::Core
-  Qt6::Quick
-  QtProtobuf::Protobuf
-  QtProtobuf::Grpc)
+  Qt${QT_VERSION_MAJOR}::Core
+  Qt${QT_VERSION_MAJOR}::Quick
+        ${QT_PROTOBUF_NAMESPACE}::Grpc
+        ${QT_PROTOBUF_NAMESPACE}::Protobuf)
 
-set_target_properties(Test PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
+
 

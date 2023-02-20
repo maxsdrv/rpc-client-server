@@ -1,94 +1,77 @@
-project(TestgRPC)
-cmake_minimum_required(VERSION 3.8)
-
+cmake_policy(SET CMP0048 NEW)
 cmake_policy(SET CMP0071 NEW)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+project(TestgRPC CXX)
+cmake_minimum_required(VERSION 3.12)
 
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_POSITION_INDEPENDENT_CODE ${Qt5_POSITION_INDEPENDENT_CODE})
-set(QT_PROTOBUF_NAMESPACE QtProtobuf)
-if(NOT TARGET ${QT_PROTOBUF_NAMESPACE}::qtprotobufgen)
-    find_package(${QT_PROTOBUF_NAMESPACE} COMPONENTS ProtobufGenerator CONFIG REQUIRED)
+include(cmake/common.cmake)
+
+# Path to proto files
+get_filename_component(server_proto "protos/server.proto" ABSOLUTE)
+get_filename_component(server_path "${server_proto}" PATH)
+
+# Generated sources
+if(NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/generated")
+    message(ERROR "Folder" "${CMAKE_CURRENT_BINARY_DIR}/generated" "is not exist ... but i make it easily")
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/generated)
+else()
+    message(STATUS "Folder" "${CMAKE_CURRENT_BINARY_DIR}/generated" " exist")
 endif()
-if(NOT TARGET ${QT_PROTOBUF_NAMESPACE}::Protobuf)
-    find_package(${QT_PROTOBUF_NAMESPACE} COMPONENTS Protobuf CONFIG REQUIRED)
-endif()
-if(NOT TARGET ${QT_PROTOBUF_NAMESPACE}::Grpc)
-    find_package(${QT_PROTOBUF_NAMESPACE} COMPONENTS Grpc CONFIG REQUIRED)
-endif()
 
+include_directories("${CMAKE_CURRENT_BINARY_DIR}/generated")
 
-#Qt libraries
-find_package(Qt5 REQUIRED COMPONENTS Quick Core Widgets Network Concurrent)
-
-set(others)
-list(APPEND other
-        profile.h)
-set(qt_source)
-list(APPEND qt_source
-        "ServerMKO.h"
-        "ServerMKO.cpp"
-        )
-
-# Targets test_rpc(client|server)
-qt_add_executable(${PROJECT_NAME} ${other} ${qt_source} qml.qrc)
-
-qt_add_qml_module(${PROJECT_NAME}
-    URI ${PROJECT_NAME}
-    VERSION 1.0
-    QML_FILES main.qml
+set(server_proto_src "${CMAKE_CURRENT_BINARY_DIR}/generated/server.pb.cc")
+set(server_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/generated/server.pb.h")
+set(server_grpc_src "${CMAKE_CURRENT_BINARY_DIR}/generated/server.grpc.pb.cc")
+set(server_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/generated/server.grpc.pb.h")
+add_custom_command(
+        OUTPUT "${server_proto_src}" "${server_proto_hdrs}"
+               "${server_grpc_src}" "${server_grpc_hdrs}"
+        COMMAND ${_PROTOBUF_PROTOC}
+        ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}/generated"
+             --cpp_out "${CMAKE_CURRENT_BINARY_DIR}/generated"
+             -I "${server_path}"
+             --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+             "${server_proto}"
+        DEPENDS "${server_proto}"
 )
 
-qtprotobuf_generate(TARGET ${PROJECT_NAME}
-        QML TRUE
-        PROTO_FILES ${CMAKE_CURRENT_SOURCE_DIR}/test_rpc.proto)
+find_package(Qt6 6.2 COMPONENTS Core REQUIRED)
 
-target_compile_definitions(${PROJECT_NAME}
-        PRIVATE "$<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>")
+set(PROJECT_SOURCES
+        #[[JsonParser.cpp
+        JsonParser.h]]
+        Server.h
+        Server.cpp
+        profile.h
+        main.cpp)
 
-#target_link_libraries(${PROJECT_NAME} test_rpc_parser)
-
-target_link_libraries(${PROJECT_NAME}
-        PRIVATE
-        Qt5::Core
-        Qt5::Quick
-        Qt5::Widgets
-        Qt5::Network
-        Qt5::Concurrent
-        ${QT_PROTOBUF_NAMESPACE}::Grpc
-        ${QT_PROTOBUF_NAMESPACE}::Protobuf
-        )
-
-if(QT_PROTOBUF_STATIC)
-    add_definitions(-DQT_PROTOBUF_STATIC)# add_definitions is used because old cmake versions
-    # compatibility
-endif()
-
-#[[foreach(_target
-        test_client test_server)
-        add_executable(${_target}
-            "${_target}.cpp" "${other}" "${qt_source}")
-        target_link_libraries(${_target}
-            tr_grpc_proto
-            test_rpc_parser
+# Server proto
+add_library(server_grpc_proto
+            ${server_proto_src}
+            ${server_proto_hdrs}
+            ${server_grpc_src}
+            ${server_grpc_hdrs})
+target_link_libraries(server_grpc_proto
             ${_REFLECTION}
             ${_GRPC_GRPCPP}
-            ${_PROTOBUF_LIBPROTOBUF}
-	    Qt6::Core
-	    Qt6::Widgets
-	    Qt6::Network
-	    Qt6::Concurrent)
-endforeach()]]
+            ${_PROTOBUF_LIBPROTOBUF})
+
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 
-
-
-
-
+target_link_libraries(${PROJECT_NAME}
+        server_grpc_proto
+        ${_REFLECTION}
+        ${_GRPC_GRPCPP}
+        ${_PROTOBUF_LIBPROTOBUF}
+        Qt6::Core
+        )
 

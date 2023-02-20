@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QtProtobufTypes>
 
+#include "ClientMKO.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +18,18 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
+
+		// Register Types(required)
+		QtProtobuf::qRegisterProtobufTypes();
+		qmlRegisterSingletonType<ClientMKO>("qtprotobuf.testrpc", 1, 0, "ClientMKO",
+																				[](QQmlEngine* engine, QJSEngine*) {
+			static ClientMKO echo_engine;
+			engine->setObjectOwnership(&echo_engine, QQmlEngine::CppOwnership);
+
+			return &echo_engine;
+		});
+
+
     engine.load(url);
 
     return app.exec();
