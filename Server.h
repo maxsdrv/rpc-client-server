@@ -1,16 +1,29 @@
 #pragma once
 
 #include <string>
-#include <QObject>
+#include <memory>
+
+#include <grpc/grpc.h>
+#include <grpcpp/security/server_credentials.h>
+#include <grpcpp/server.h>
+#include <grpcpp/server_builder.h>
+#include <grpcpp/server_context.h>
+
 
 #include "server.grpc.pb.h"
 #include "server.grpc.pb.h"
 
-class Server : public QObject {
-	Q_OBJECT
+using grpc::Server;
+using grpc::ServerContext;
+using grpc::ServerBuilder;
+
+using namespace servermko;
+using servermko::ServerResponse;
+
+class MKOServer final : public ServerTestMKO::Service {
 public:
-	explicit Server(QObject* parent = nullptr);
-	~Server() override { qDebug("~Server()"); }
+	explicit MKOServer();
+	~MKOServer() { std::cout << "~Server()\n"; }
 	void run_server(const std::string& db_path);
 private:
 

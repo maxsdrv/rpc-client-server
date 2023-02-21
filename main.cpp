@@ -6,7 +6,8 @@
 
 int main(int argc, char** argv) {
 	qDebug("Server test");
-	Server s;
+	MKOServer s;
+	s.run_server("hello");
 
 	return 0;
 }

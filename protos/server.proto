@@ -2,6 +2,13 @@ syntax = "proto3";
 
 package servermko;
 
+service ServerTestMKO {
+    rpc get_json(ServerRequest) returns (ServerResponse) {}
+}
+
 message ServerResponse {
+    string message = 1;
+}
+message ServerRequest {
     string message = 1;
 }
