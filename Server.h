@@ -13,6 +13,9 @@
 #include "server.grpc.pb.h"
 #include "server.grpc.pb.h"
 
+#include "test_rpc_grpc.qpb.h"
+#include "test_rpc.qpb.h"
+
 using grpc::Server;
 using grpc::ServerContext;
 using grpc::ServerBuilder;
@@ -23,7 +26,7 @@ using servermko::ServerResponse;
 class MKOServer final : public ServerTestMKO::Service {
 public:
 	explicit MKOServer();
-	~MKOServer() { std::cout << "~Server()\n"; }
+	~MKOServer() override { std::cout << "~Server()\n"; }
 	void run_server(const std::string& db_path);
 private:
 

@@ -7,3 +7,4 @@ Test/build-debug/
 Test/.idea/
 Test/.cache/
 Test/cmake-build-debug/
+Test/build

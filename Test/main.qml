@@ -29,7 +29,7 @@ Window {
                 anchors.verticalCenter: parent.verticalCenter
                 width: 400
                 onAccepted: {
-                    ServerMKO.request(request);
+                    ClientMKO.request(request);
                     text = ""
                 }
             }
@@ -42,7 +42,7 @@ Window {
             }
             Text {
                 anchors.verticalCenter: parent.verticalCenter
-                text: echo_engine.response.message
+                text: ClientMKO.response.message
             }
         }
 

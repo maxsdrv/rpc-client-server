@@ -47,8 +47,10 @@ add_executable(Test
   ${PROJECT_SOURCES}
 )
 # Generate Protobuf files
-qtprotobuf_generate(TARGET Test PROTO_FILES
-        "${CMAKE_CURRENT_SOURCE_DIR}/test_rpc.proto" QML TRUE)
+qtprotobuf_generate(TARGET Test ${CMAKE_CURRENT_BINARY_DIR} PROTO_FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/test_rpc.proto"
+        QML TRUE)
+
 
 # For Qml requirements
 target_compile_definitions(Test
@@ -63,7 +65,7 @@ target_link_libraries(Test
   Qt${QT_VERSION_MAJOR}::Core
   Qt${QT_VERSION_MAJOR}::Quick
         ${QT_PROTOBUF_NAMESPACE}::Grpc
-        ${QT_PROTOBUF_NAMESPACE}::Protobuf)
-
+        ${QT_PROTOBUF_NAMESPACE}::Protobuf
+        )
 
 

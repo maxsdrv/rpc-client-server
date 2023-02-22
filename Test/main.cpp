@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 		qmlRegisterSingletonType<ClientMKO>("qtprotobuf.testrpc", 1, 0, "ClientMKO",
 																				[](QQmlEngine* engine, QJSEngine*) {
 			static ClientMKO echo_engine;
-			engine->setObjectOwnership(&echo_engine, QQmlEngine::CppOwnership);
+			QQmlEngine::setObjectOwnership(&echo_engine, QQmlEngine::CppOwnership);
 
 			return &echo_engine;
 		});
@@ -32,5 +32,5 @@ int main(int argc, char *argv[])
 
     engine.load(url);
 
-    return app.exec();
+    return QGuiApplication::exec();
 }

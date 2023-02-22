@@ -53,6 +53,7 @@ set(PROJECT_SOURCES
         profile.h
         main.cpp)
 
+include_directories(Test/cmake-build-debug/)
 # Server proto
 add_library(server_grpc_proto
             ${server_proto_src}
@@ -65,7 +66,6 @@ target_link_libraries(server_grpc_proto
             ${_PROTOBUF_LIBPROTOBUF})
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
-
 
 target_link_libraries(${PROJECT_NAME}
         server_grpc_proto

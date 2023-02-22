@@ -12,18 +12,20 @@ using namespace qtprotobuf::testrpc;
 
 class ClientMKO : public QObject {
     Q_OBJECT
-    Q_PROPERTY(qtprotobuf::testrpc::EchoResponse* response READ response CONSTANT)
+    Q_PROPERTY(EchoResponse* response READ response CONSTANT)
 public:
   explicit ClientMKO(QObject *parent = nullptr);
-  ~ClientMKO() override { qDebug() << "ClientMKO()"; }
+  ~ClientMKO() override { qDebug() << "~ClientMKO()"; }
 
   Q_INVOKABLE void request(qtprotobuf::testrpc::EchoRequest* req);
 
   qtprotobuf::testrpc::EchoResponse* response() const {
+			qDebug() << "Response message: " << m_response->message();
       return m_response.get();
   }
 
 private:
+
     std::unique_ptr<qtprotobuf::testrpc::EchoServiceClient> m_client;
     std::unique_ptr<qtprotobuf::testrpc::EchoResponse> m_response;
 };
