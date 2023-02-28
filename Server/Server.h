@@ -2,8 +2,7 @@
 
 #include <string>
 #include <memory>
-
-
+#include <QDebug>
 
 #include <grpc/grpc.h>
 #include <grpcpp/security/server_credentials.h>
@@ -19,11 +18,20 @@ using qtprotobuf::testrpc::EchoRequest;
 using qtprotobuf::testrpc::EchoResponse;
 using grpc::ServerBuilder;
 using grpc::Server;
+using grpc::Status;
+using grpc::ServerContext;
 
 class MKOServer final : public EchoService::Service {
 public:
 	explicit MKOServer();
 	~MKOServer() override { std::cout << "~Server()\n"; }
+
+	Status Echo(ServerContext* context,  const EchoRequest* req, EchoResponse* res) override {
+		qDebug() << "Request from client: " << req->message().c_str();
+
+		return Status::OK;
+	}
+
 	void run_server(const std::string& db_path);
 private:
 

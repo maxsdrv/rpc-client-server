@@ -16,7 +16,7 @@ set(PROJECT_SOURCES
 
 add_executable(${TARGET} ${PROJECT_SOURCES} ${GENERATED_SOURCES})
 
-target_include_directories(${TARGET} PRIVATE ${PATH_PROTO})
+target_include_directories(${TARGET} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 file(GLOB PROTO_FILES ABSOLUTE "${CMAKE_CURRENT_SOURCE_DIR}/../protos/rpc_mko.proto")
 qt_protobuf_internal_protobuf_generate_all(TARGET ${TARGET}
@@ -28,4 +28,3 @@ target_link_libraries(${TARGET} PRIVATE
         gRPC::grpc++
         gRPC::grpc
         Qt5::Core)
-

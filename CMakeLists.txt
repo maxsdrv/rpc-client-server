@@ -50,6 +50,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(cmake/common.cmake)
+include(cmake/QtProtobufTestHelpers.cmake)
+include(cmake/QtProtobufInternalHelpers.cmake)
 
 add_qt5_server()
 

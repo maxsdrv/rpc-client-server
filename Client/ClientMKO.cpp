@@ -9,8 +9,6 @@
 
 using namespace QtProtobuf;
 
-
-
 ClientMKO::ClientMKO(QObject *parent) : QObject(parent),
 																				m_client(new EchoServiceClient),
 																				m_response(new EchoResponse) {

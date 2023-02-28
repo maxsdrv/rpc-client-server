@@ -1,7 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtProtobufTypes>
-
 #include "ClientMKO.h"
 
 int main(int argc, char *argv[])
@@ -32,4 +31,5 @@ int main(int argc, char *argv[])
     engine.load(url);
 
     return QGuiApplication::exec();
+
 }
