@@ -23,17 +23,23 @@ using grpc::ServerContext;
 
 class MKOServer final : public EchoService::Service {
 public:
-	explicit MKOServer();
+	explicit MKOServer(const QString& db);
 	~MKOServer() override { std::cout << "~Server()\n"; }
 
 	Status Echo(ServerContext* context,  const EchoRequest* req, EchoResponse* res) override {
 		qDebug() << "Request from client: " << req->message().c_str();
+		std::string rev_message {};
+		std::copy(req->message().rbegin(), req->message().rend(), std::back_inserter(rev_message));
+		res->set_message(rev_message);
 
 		return Status::OK;
 	}
 
-	void run_server(const std::string& db_path);
 private:
-
+	std::vector<EchoResponse> _res_list;
 };
+
+
+
+
 

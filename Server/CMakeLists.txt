@@ -11,10 +11,13 @@ set(PROJECT_SOURCES
         JsonParser.h]]
         Server.h
         Server.cpp
+        helper.h
+        helper.cpp
         profile.h
         main.cpp)
 
-add_executable(${TARGET} ${PROJECT_SOURCES} ${GENERATED_SOURCES})
+set(RES_PROJ resources.qrc)
+add_executable(${TARGET} ${PROJECT_SOURCES} ${GENERATED_SOURCES} ${RES_PROJ})
 
 target_include_directories(${TARGET} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 

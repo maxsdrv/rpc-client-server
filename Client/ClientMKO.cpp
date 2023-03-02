@@ -7,6 +7,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+
 using namespace QtProtobuf;
 
 ClientMKO::ClientMKO(QObject *parent) : QObject(parent),
@@ -17,7 +18,7 @@ ClientMKO::ClientMKO(QObject *parent) : QObject(parent),
 																																						 QGrpcInsecureChannelCredentials() |
 																																							 QGrpcInsecureCallCredentials()));
 	m_client->attachChannel(channel);
-m_client->attachChannel(std::shared_ptr<QAbstractGrpcChannel>(
+	m_client->attachChannel(std::shared_ptr<QAbstractGrpcChannel>(
 					new QGrpcHttp2Channel(QUrl("http://localhost:65000"),
 																QGrpcInsecureChannelCredentials() |
 																QGrpcInsecureCallCredentials())

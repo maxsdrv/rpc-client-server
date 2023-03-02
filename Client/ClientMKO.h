@@ -27,7 +27,7 @@ public:
   }
 
 private:
-
     std::unique_ptr<qtprotobuf::testrpc::EchoServiceClient> m_client;
     std::unique_ptr<qtprotobuf::testrpc::EchoResponse> m_response;
+
 };

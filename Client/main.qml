@@ -5,10 +5,12 @@ import QtQuick.Controls 2.15
 import qtprotobuf.testrpc 1.0
 
 Window {
+    id: root
     width: 640
     height: 480
     visible: true
     title: qsTr("Client Testing")
+    color: "#faebd7"
 
     EchoRequest {
       id: request
@@ -35,6 +37,7 @@ Window {
             }
         }
         Row {
+            id: respond
             spacing: 20
             Text {
                 anchors.verticalCenter: parent.verticalCenter
@@ -46,5 +49,43 @@ Window {
             }
         }
 
+        Column {
+            spacing: 50
+            Row {
+                spacing: 50
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "List Operators:"
+                }
+
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: //TODO operator list from server .json
+                          ""
+                }
+            }
+        }
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

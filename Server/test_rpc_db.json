@@ -1,29 +1,19 @@
 [{
-    "values": {
-      "first": 5,
-      "second": 10
-    },
-    "name": "Addition"
+    "module": {
+      "name": "Test Operators",
+      "command": [
+        {"name": "ADDITION_TWO_NUMBERS", "short_description": "Test addition operator",
+          "description": "Test operator for addition two values", "header": "test_addition(int, int)"}
+      ]
+    }
 },
   {
-    "values": {
-      "first": 230,
-      "second": 140
-    },
-    "name": "Subtraction"
-  },
-  {
-    "values": {
-      "first": 4,
-      "second": 5
-    },
-    "name": "Multiplication"
-  },
-  {
-    "values": {
-      "first": 20,
-      "second": 6
-    },
-    "name": "Division"
+    "module": {
+      "name": "Test Operators",
+      "command": [
+        {"name": "SUBTRACTION_TWO_NUMBERS", "short_description": "Test subtraction operator",
+        "description": "Test operator for subtraction two values", "header": "test_subtraction(int, int)"}
+      ]
+    }
   }
 ]
