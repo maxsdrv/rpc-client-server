@@ -11,8 +11,8 @@ project(MKOServer VERSION ${MKO_SERVER_VERSION} LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Path to link QtProtobuf libraries
-set(CMAKE_PREFIX_PATH "/home/maxim/projects-okb44/aik/rpc-client-server/Libraries/")
-# Path to link GoogleTest libraries 
+set(CMAKE_PREFIX_PATH "Libraries/")
+# Path to link GoogleTest libraries
 #set(CMAKE_PREFIX_PATH "/home/maxim/projects-okb44/aik/rpc-client-server/Libraries/GoogleTest/lib/cmake/")
 # Path to link MikroJson libraries 
 #set(CMAKE_PREFIX_PATH "/home/maxim/projects-okb44/aik/rpc-client-server/Libraries/MikroJson/lib/cmake/")
