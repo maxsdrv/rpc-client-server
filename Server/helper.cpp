@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <QVariantMap>
 #include <QFile>
+#include <QJsonArray>
 
 #include "helper.h"
 #include "rpc_mko.grpc.pb.h"
@@ -39,19 +40,51 @@ QString get_db_content(int argc, char** argv) {
 	while (!file.atEnd()) {
 		line = in.readAll();
 	}
+
 	return line;
 }
 
-parser::parser(QString db) : _db(std::move(db)) {
-	QJsonDocument doc = QJsonDocument::fromJson(_db.toUtf8());
-	QJsonObject obj = doc.object();
-	QVariantMap map = obj.toVariantMap();
-	qDebug() << map["name"].toString();
+bool parser::match(const QString& prefix) {
+	bool eq = _db.indexOf(current_, prefix.size()) == prefix;
+	if (current_ == 0) {
+		_db.remove(current_, 1);
+		_db.remove(_db.size() - 1, _db.size());
+	}
+	current_ += prefix.size();
+	return eq;
 }
-
+bool parser::set_failed_and_return_false() {
+	failed = true;
+	return false;
+}
+parser::parser(QString db) : _db(std::move(db)) {
+	/* remove "[" "]"  */
+	/*if (!match("[")) {
+		set_failed_and_return_false();
+	}*/
+}
+bool parser::try_parse() {
+	QJsonParseError parse_error{};
+	QJsonDocument doc = QJsonDocument::fromJson(_db.toUtf8(), &parse_error);
+	if (parse_error.error != QJsonParseError::NoError) {
+		qWarning() << "Parse error at" << parse_error.offset;
+	}
+	QJsonObject object = doc.object();
+	QVariantMap map = object.toVariantMap();
+	qDebug() << map["operatorName"].toString();
+	QJsonValue value = object.value("command");
+	QJsonArray array = value.toArray();
+	for (const auto& a : array) {
+		qDebug() << a.toString();
+	}
+}
 void parse_db(const QString& db, std::vector<EchoResponse>* res_list) {
-	/* delete spaces */
-
+	res_list->clear();
+	QString db_content(db);
+	db_content = db_content.simplified();
+	db_content.replace(" ", "");
+	parser parser(std::move(db_content));
+	parser.try_parse();
 }
 
 } //namespace qtprotobuf::testrpc

@@ -1,19 +1,7 @@
-[{
-    "module": {
-      "name": "Test Operators",
-      "command": [
-        {"name": "ADDITION_TWO_NUMBERS", "short_description": "Test addition operator",
-          "description": "Test operator for addition two values", "header": "test_addition(int, int)"}
-      ]
-    }
-},
-  {
-    "module": {
-      "name": "Test Operators",
-      "command": [
-        {"name": "SUBTRACTION_TWO_NUMBERS", "short_description": "Test subtraction operator",
-        "description": "Test operator for subtraction two values", "header": "test_subtraction(int, int)"}
-      ]
-    }
-  }
-]
+{
+  "operatorName": "Test Operators",
+  "command": [
+       "Addition_Two_Numbers",
+       "Test_addition_operator"
+  ]
+}
