@@ -12,13 +12,17 @@ class parser {
 public:
 	explicit parser(QString db);
 	~parser() = default;
-	bool try_parse();
+	bool try_parse(EchoResponse* ptr_res);
+	bool is_finished() {
+		return current_ >= _db.size();
+	}
 private:
 	QString _db;
 	bool failed = false;
 	int current_ = 0;
 	bool match(const QString& prefix);
 	bool set_failed_and_return_false();
+
 };
 
 } //namespace qtprotobuf::testrpc

@@ -63,7 +63,7 @@ parser::parser(QString db) : _db(std::move(db)) {
 		set_failed_and_return_false();
 	}*/
 }
-bool parser::try_parse() {
+bool parser::try_parse(EchoResponse* ptr_res) {
 	QJsonParseError parse_error{};
 	QJsonDocument doc = QJsonDocument::fromJson(_db.toUtf8(), &parse_error);
 	if (parse_error.error != QJsonParseError::NoError) {
@@ -72,7 +72,8 @@ bool parser::try_parse() {
 	QJsonObject object = doc.object();
 	QVariantMap map = object.toVariantMap();
 	qDebug() << map["operatorName"].toString();
-	QJsonValue value = object.value("command");
+	qDebug() << map["command"].toString();
+	QJsonValue value = object.value("description");
 	QJsonArray array = value.toArray();
 	for (const auto& a : array) {
 		qDebug() << a.toString();
@@ -84,7 +85,16 @@ void parse_db(const QString& db, std::vector<EchoResponse>* res_list) {
 	db_content = db_content.simplified();
 	db_content.replace(" ", "");
 	parser parser(std::move(db_content));
-	parser.try_parse();
+	EchoResponse response;
+	while (!parser.is_finished()) {
+		res_list->emplace_back(EchoResponse());
+		if (!parser.try_parse(&res_list->back())) {
+			qDebug() << "Error parsing the db file";
+			res_list->clear();
+			break;
+		}
+	}
+	qDebug() << "DB parsed, loaded " << res_list->size() << " operators.";
 }
 
 } //namespace qtprotobuf::testrpc

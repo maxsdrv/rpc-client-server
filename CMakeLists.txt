@@ -10,18 +10,16 @@ project(MKOServer VERSION ${MKO_SERVER_VERSION} LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-# Path to link QtProtobuf libraries
-set(CMAKE_PREFIX_PATH "Libraries/")
-# Path to link GoogleTest libraries
-#set(CMAKE_PREFIX_PATH "/home/maxim/projects-okb44/aik/rpc-client-server/Libraries/GoogleTest/lib/cmake/")
-# Path to link MikroJson libraries 
-#set(CMAKE_PREFIX_PATH "/home/maxim/projects-okb44/aik/rpc-client-server/Libraries/MikroJson/lib/cmake/")
 
+set(CMAKE_PREFIX_PATH Libraries/)
+
+include(cmake/common.cmake)
+include(cmake/QtProtobufTestHelpers.cmake)
+include(cmake/QtProtobufInternalHelpers.cmake)
 
 # QtProtobuf settings https://github.com/semlanik/qtprotobuf/blob/0.6/examples/clienttutorial/CMakeLists.txt
 set(CMAKE_POSITION_INDEPENDENT_CODE ${Qt5_POSITION_INDEPENDENT_CODE})
 set(QT_PROTOBUF_NAMESPACE QtProtobuf)
-
 
 if(NOT TARGET ${QT_PROTOBUF_NAMESPACE}::qtprotobufgen)
     find_package(${QT_PROTOBUF_NAMESPACE} COMPONENTS ProtobufGenerator CONFIG REQUIRED)
@@ -48,10 +46,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-include(cmake/common.cmake)
-include(cmake/QtProtobufTestHelpers.cmake)
-include(cmake/QtProtobufInternalHelpers.cmake)
 
 add_qt5_server()
 

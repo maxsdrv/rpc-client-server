@@ -1,6 +1,7 @@
 {
   "operatorName": "Test Operators",
-  "command": [
+  "command": "Addition",
+  "description": [
        "Addition_Two_Numbers",
        "Test_addition_operator"
   ]
