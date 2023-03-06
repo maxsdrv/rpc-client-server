@@ -78,6 +78,7 @@ bool parser::try_parse(EchoResponse* ptr_res) {
 	for (const auto& a : array) {
 		qDebug() << a.toString();
 	}
+
 }
 void parse_db(const QString& db, std::vector<EchoResponse>* res_list) {
 	res_list->clear();
