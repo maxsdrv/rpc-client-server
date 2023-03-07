@@ -30,3 +30,7 @@ void ClientMKO::request(EchoRequest *req) {
 	m_client->Echo(*req, m_response.get());
 }
 
+void ClientMKO::get_operators(EchoRequest* get_op) {
+	qDebug() << "Get list operators: ";
+}
+

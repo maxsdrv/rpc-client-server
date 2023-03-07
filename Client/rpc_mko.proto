@@ -8,6 +8,7 @@ message EchoRequest {
 
 message EchoResponse {
     string message = 1;
+    repeated EchoResponse list_messages = 2;
 }
 
 service EchoService {

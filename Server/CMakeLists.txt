@@ -19,7 +19,7 @@ set(PROJECT_SOURCES
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-file(GLOB PROTO_FILES ABSOLUTE "${CMAKE_CURRENT_SOURCE_DIR}/../protos/rpc_mko.proto")
+file(GLOB PROTO_FILES ABSOLUTE "${CMAKE_CURRENT_SOURCE_DIR}/../Client/rpc_mko.proto")
 
 add_executable(${TARGET} ${PROJECT_SOURCES} ${GENERATED_SOURCES} ${RES_PROJ})
 
