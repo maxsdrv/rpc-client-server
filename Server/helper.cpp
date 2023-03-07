@@ -57,12 +57,8 @@ bool parser::set_failed_and_return_false() {
 	failed = true;
 	return false;
 }
-parser::parser(QString db) : _db(std::move(db)) {
-	/* remove "[" "]"  */
-	/*if (!match("[")) {
-		set_failed_and_return_false();
-	}*/
-}
+parser::parser(QString db) : _db(std::move(db)) { }
+
 bool parser::try_parse(EchoResponse* ptr_res) {
 	QJsonParseError parse_error{};
 	QJsonDocument doc = QJsonDocument::fromJson(_db.toUtf8(), &parse_error);
@@ -71,14 +67,31 @@ bool parser::try_parse(EchoResponse* ptr_res) {
 	}
 	QJsonObject object = doc.object();
 	QVariantMap map = object.toVariantMap();
-	qDebug() << map["operatorName"].toString();
-	qDebug() << map["command"].toString();
-	QJsonValue value = object.value("description");
-	QJsonArray array = value.toArray();
-	for (const auto& a : array) {
-		qDebug() << a.toString();
+	auto begin_json = map["success"].toBool();	
+	qDebug() << begin_json;	
+	if (!begin_json) {
+		qDebug() << "Error begin format json";
+		return false;
 	}
 
+	std::map<QStringList, QStringList> l_op;
+	QStringList operator_names;
+	QStringList operator_keys;
+	QJsonArray array = object["properties"].toArray();
+	for (const auto& a : array) {
+		QJsonObject obj = a.toObject();
+		operator_names.append(obj["operatorName"].toString());
+		operator_keys.append(obj["command"].toString());
+	}
+	// qDebug() << operator_names << "\n" << operator_keys;
+
+	QString op_names;
+	QString op_commands;
+	QJsonObject obj = array[current_].toObject();
+	op_names.append(obj["operatorName"].toString());
+	op_commands.append(obj["command"].toString());
+	
+	// return true;	
 }
 void parse_db(const QString& db, std::vector<EchoResponse>* res_list) {
 	res_list->clear();

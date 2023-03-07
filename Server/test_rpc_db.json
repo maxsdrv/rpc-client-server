@@ -1,8 +1,22 @@
 {
-  "operatorName": "Test Operators",
-  "command": "Addition",
-  "description": [
-       "Addition_Two_Numbers",
-       "Test_addition_operator"
+  "success": true,
+  "properties": [
+  {
+    "operatorName": "Test Operators",
+    "command": "Addition",
+    "description": [
+      "Addition two numbers",
+      "Test addition operator"
+    ] 
+  },
+
+{
+    "operatorName": "Test Operators",
+    "command": "Substraction",
+    "description": [
+      "Substraction operator",
+      "Test for substraction"
+    ]
+  }
   ]
 }
