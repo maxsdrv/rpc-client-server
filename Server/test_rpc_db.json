@@ -2,20 +2,19 @@
   "success": true,
   "properties": [
   {
-    "operatorName": "Test Operators",
+    "operatorName": "JSON Test Operators Module",
     "command": "Addition",
-    "description": [
-      "Addition two numbers",
-      "Test addition operator"
-    ] 
+    "description": 
+      "Addition Two Numbers, Test Addition Operator"
+     
   },
 
 {
-    "operatorName": "Test Operators",
+    "operatorName": "JSON Test Operators Module",
     "command": "Substraction",
     "description": [
-      "Substraction operator",
-      "Test for substraction"
+      "Substraction Operator",
+      "Test For Substraction"
     ]
   }
   ]

@@ -7,6 +7,9 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+#include <grpc/grpc.h>
+#include <grpcpp/channel.h>
+#include <grpcpp/client_context.h>
 
 using namespace QtProtobuf;
 
@@ -32,5 +35,9 @@ void ClientMKO::request(EchoRequest *req) {
 
 void ClientMKO::get_operators(EchoRequest* get_op) {
 	qDebug() << "Get list operators: ";
+
+
+
+	m_client->Echo(*get_op, m_response.get());
 }
 

@@ -1,18 +1,18 @@
-#include <utility>
-#include <vector>
-#include <string>
+#include <QFile>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QVariantMap>
-#include <QFile>
-#include <QJsonArray>
+#include <string>
+#include <utility>
+#include <vector>
 
 #include "helper.h"
 #include "rpc_mko.grpc.pb.h"
 
 namespace qtprotobuf::testrpc {
 
-QString get_db_content(int argc, char** argv) {
+QString get_db_content(int argc, char **argv) {
 	std::string db_path;
 	std::string arg_str("--db_path");
 	if (argc > 1) {
@@ -44,7 +44,7 @@ QString get_db_content(int argc, char** argv) {
 	return line;
 }
 
-bool parser::match(const QString& prefix) {
+bool parser::match(const QString &prefix) {
 	bool eq = _db.indexOf(current_, prefix.size()) == prefix;
 	if (current_ == 0) {
 		_db.remove(current_, 1);
@@ -53,51 +53,46 @@ bool parser::match(const QString& prefix) {
 	current_ += prefix.size();
 	return eq;
 }
-bool parser::set_failed_and_return_false() {
-	failed = true;
-	return false;
-}
-parser::parser(QString db) : _db(std::move(db)) { }
 
-bool parser::try_parse(EchoResponse* ptr_res) {
+
+parser::parser(QString db) : _db(std::move(db)) {}
+
+bool parser::try_parse(EchoResponse *ptr_res) {
 	QJsonParseError parse_error{};
-	QJsonDocument doc = QJsonDocument::fromJson(_db.toUtf8(), &parse_error);
-	if (parse_error.error != QJsonParseError::NoError) {
+	auto doc = QJsonDocument::fromJson(_db.toUtf8(), &parse_error);
+	if (parse_error.error != QJsonParseError::NoError) 
 		qWarning() << "Parse error at" << parse_error.offset;
-	}
+
 	QJsonObject object = doc.object();
-	QVariantMap map = object.toVariantMap();
-	auto begin_json = map["success"].toBool();	
-	qDebug() << begin_json;	
-	if (!begin_json) {
-		qDebug() << "Error begin format json";
-		return false;
-	}
+	auto array = object["properties"].toArray();
 
-	std::map<QStringList, QStringList> l_op;
-	QStringList operator_names;
-	QStringList operator_keys;
-	QJsonArray array = object["properties"].toArray();
-	for (const auto& a : array) {
-		QJsonObject obj = a.toObject();
-		operator_names.append(obj["operatorName"].toString());
-		operator_keys.append(obj["command"].toString());
-	}
-	// qDebug() << operator_names << "\n" << operator_keys;
-
-	QString op_names;
-	QString op_commands;
+	QString op_description {};
 	QJsonObject obj = array[current_].toObject();
-	op_names.append(obj["operatorName"].toString());
-	op_commands.append(obj["command"].toString());
-	
-	// return true;	
+
+	ptr_res->mutable_list_messages()->set_name(
+		obj["operatorName"].toString().toStdString()
+		);
+	ptr_res->mutable_list_messages()->set_command(
+		obj["command"].toString().toStdString()
+		);
+	auto temp = obj.value(QString("description")).isArray(); 
+	if (temp) {
+		auto ar = obj.value(QString("description")).toArray();
+		op_description.append(ar.at(current_).toString());		
+	}		
+	else 
+		op_description.append(obj["description"].toString());
+
+	if (array[++current_].isUndefined()) {
+		current_ += _db.size();
+	}
+
+	return true;
 }
-void parse_db(const QString& db, std::vector<EchoResponse>* res_list) {
+void parse_db(const QString &db, std::vector<EchoResponse> *res_list) {
 	res_list->clear();
 	QString db_content(db);
 	db_content = db_content.simplified();
-	db_content.replace(" ", "");
 	parser parser(std::move(db_content));
 	EchoResponse response;
 	while (!parser.is_finished()) {
@@ -111,6 +106,4 @@ void parse_db(const QString& db, std::vector<EchoResponse>* res_list) {
 	qDebug() << "DB parsed, loaded " << res_list->size() << " operators.";
 }
 
-} //namespace qtprotobuf::testrpc
-
-
+} // namespace qtprotobuf::testrpc

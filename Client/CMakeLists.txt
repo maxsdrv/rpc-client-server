@@ -18,7 +18,11 @@ qt_protobuf_internal_add_example(TARGET ${TARGET}
                 ClientMKO.cpp
         RESOURCES qml.qrc
         QML_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(${TARGET} PRIVATE examples_common)
+target_link_libraries(${TARGET} PRIVATE examples_common
+        PUBLIC
+        ${_REFLECTION}
+        ${_GRPC_GRPCPP}
+        ${_PROTOBUF_LIBPROTOBUF})
 
 #[[
 add_executable(${TARGET}

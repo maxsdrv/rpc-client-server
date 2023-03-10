@@ -36,6 +36,7 @@ Window {
                 width: 400
                 onAccepted: {
                     ClientMKO.request(request);
+                    ClientMKO.get_operators(request);
                     text = "";
                 }
             }
@@ -88,7 +89,7 @@ Window {
                 }
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: ClientMKO.response.message
+                    text: ClientMKO.array_op.command
                 }
                 
             }

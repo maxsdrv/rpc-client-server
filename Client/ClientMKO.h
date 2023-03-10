@@ -30,15 +30,12 @@ public:
   }
   qtprotobuf::testrpc::EchoResponse* array_op() const {
       qDebug() <<  "List operators: ";
-      for (const auto& l : m_response->listMessages()) {
-          qDebug() << l << " ";
-      }
-      std::cout << '\n'; 
       return m_response.get();
   }
   
 
 private:
+
     std::unique_ptr<qtprotobuf::testrpc::EchoServiceClient> m_client;
     std::unique_ptr<qtprotobuf::testrpc::EchoResponse> m_response;
 
