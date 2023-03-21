@@ -41,6 +41,8 @@ QString get_db_content(int argc, char **argv) {
 		line = in.readAll();
 	}
 
+    file.close();
+
 	return line;
 }
 
@@ -69,12 +71,13 @@ bool parser::try_parse(EchoResponse *ptr_res) {
 	QString op_description {};
 	QJsonObject obj = array[current_].toObject();
 
-	ptr_res->mutable_list_messages()->set_name(
-		obj["operatorName"].toString().toStdString()
-		);
-	ptr_res->mutable_list_messages()->set_command(
-		obj["command"].toString().toStdString()
-		);
+	// ptr_res->mutable_list_messages()->set_name(
+	// 	obj["operatorName"].toString().toStdString()
+	// 	);
+	// ptr_res->mutable_list_messages()->set_command(
+	// 	obj["command"].toString().toStdString()
+	// 	);
+
 	auto temp = obj.value(QString("description")).isArray(); 
 	if (temp) {
 		auto ar = obj.value(QString("description")).toArray();

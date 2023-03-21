@@ -31,23 +31,48 @@ public:
   Status Echo(ServerContext *context, const EchoRequest *req,
               EchoResponse *res) override {
     qDebug() << "Request from client: " << req->message().c_str();
-    std::string rev_message{};
-    std::copy(req->message().rbegin(), req->message().rend(),
-              std::back_inserter(rev_message));
-    res->set_message(rev_message);
+
+    // std::string rev_message{};
+    // std::copy(req->message().rbegin(), req->message().rend(),
+    //           std::back_inserter(rev_message));
+    // res->set_message(rev_message);
+
+    std::string prefix("Echo: ");
+    res->set_message(prefix + req->message());
 
     return Status::OK;
   }
 
-	Status get_operators(ServerContext* context, ServerReaderWriter<EchoResponse, EchoRequest>* stream) override {
-		qDebug() << "Test stream operators:";
-		EchoRequest req;
-		while (stream->Read(&req)) {
-			std::unique_lock<std::mutex> lock(mu_);
-			for (const EchoResponse& er : _res_list) {
-				stream->Write(er);
-			}
-		}
+	Status get_operators(ServerContext* context, const EchoRequest* request,
+                       grpc::ServerWriter<Operators>* writer) override {
+		// qDebug() << "Test stream operators:";
+		// EchoRequest req;
+		// while (stream->Read(&req)) {
+		// 	std::unique_lock<std::mutex> lock(mu_);
+		// 	for (const EchoResponse& er : _res_list) {
+		// 		stream->Write(er);
+		// 	}
+		// }
+
+    Operators op1;
+    op1.set_name("Operator1");
+    op1.set_command("cmd1");
+    op1.add_description("desc1.1");
+    op1.add_description("desc1.2");
+    op1.add_description("desc1.3");
+
+    Operators op2;
+    op2.set_name("Operator2");
+    op2.set_command("cmd2");
+    op2.add_description("desc2.1");
+    op2.add_description("desc2.2");
+    op2.add_description("desc2.3");
+
+
+    writer->Write(op1);
+    writer->Write(op2);
+
+
 		return Status::OK;
 	}
 

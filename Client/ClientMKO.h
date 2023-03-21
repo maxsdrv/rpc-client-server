@@ -10,7 +10,20 @@
 #include "rpc_mko.qpb.h"
 #include "rpc_mko_grpc.qpb.h"
 
+#include <grpcpp/grpcpp.h>
+
+using grpc::Channel;
+using grpc::ClientContext;
+using grpc::Status;
+
 using namespace qtprotobuf::testrpc;
+
+
+// using qtprotobuf::testrpc::EchoRequest;
+// using qtprotobuf::testrpc::EchoResponse;
+// using qtprotobuf::testrpc::Operators;
+
+
 
 class ClientMKO : public QObject {
     Q_OBJECT
@@ -21,8 +34,8 @@ public:
   explicit ClientMKO(QObject *parent = nullptr);
   ~ClientMKO() override { qDebug() << "~ClientMKO()"; }
 
-  Q_INVOKABLE void request(qtprotobuf::testrpc::EchoRequest* req);
-  Q_INVOKABLE void get_operators(qtprotobuf::testrpc::EchoRequest* get_op);
+  Q_INVOKABLE void request(EchoRequest* req);
+  Q_INVOKABLE void get_operators(EchoRequest* get_op);
 
   qtprotobuf::testrpc::EchoResponse* response() const {
 			qDebug() << "Response message: " << m_response->message();
@@ -36,7 +49,13 @@ public:
 
 private:
 
-    std::unique_ptr<qtprotobuf::testrpc::EchoServiceClient> m_client;
-    std::unique_ptr<qtprotobuf::testrpc::EchoResponse> m_response;
-
+    std::unique_ptr<EchoServiceClient> m_client;
+    std::unique_ptr<EchoResponse> m_response;
 };
+
+// class EchoClient {
+// public:
+//     EchoClient(std::shared_ptr<Channel> channel) : stub_(EchoService::NewStub(channel)) {}
+// private:
+//     std::unique_ptr<EchoService::Stub> stub_;
+// };
