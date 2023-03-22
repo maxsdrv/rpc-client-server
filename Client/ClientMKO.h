@@ -6,9 +6,8 @@
 #include <QDebug>
 #include <QTcpServer>
 
-#include "profile.h"
-#include "rpc_mko.qpb.h"
 #include "rpc_mko_grpc.qpb.h"
+#include "rpc_mko.qpb.h"
 
 #include <grpcpp/grpcpp.h>
 
@@ -38,8 +37,8 @@ public:
   Q_INVOKABLE void get_operators(EchoRequest* get_op);
 
   qtprotobuf::testrpc::EchoResponse* response() const {
-			qDebug() << "Response message: " << m_response->message();
-      return m_response.get();
+	qDebug() << "Response message: " << m_response->message();
+    return m_response.get();
   }
   qtprotobuf::testrpc::EchoResponse* array_op() const {
       qDebug() <<  "List operators: ";
@@ -53,9 +52,22 @@ private:
     std::unique_ptr<EchoResponse> m_response;
 };
 
-// class EchoClient {
-// public:
-//     EchoClient(std::shared_ptr<Channel> channel) : stub_(EchoService::NewStub(channel)) {}
-// private:
-//     std::unique_ptr<EchoService::Stub> stub_;
-// };
+class EchoClient : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(QString Echo READ Echo WRITE set_msg NOTIFY msg_changed)
+	Q_PROPERTY(QString get_operators READ get_operators)
+public:
+    explicit EchoClient(QObject* parent = nullptr);
+    ~EchoClient() = default;
+
+    void set_msg(const QString& message); 
+    QString Echo() const; 
+    QString get_operators();
+
+private:
+    std::unique_ptr<EchoServiceClient> m_client;
+    std::unique_ptr<EchoResponse> m_response;
+
+signals:
+    void msg_changed();
+};
