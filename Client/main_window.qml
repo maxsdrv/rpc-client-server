@@ -30,12 +30,20 @@ ApplicationWindow {
     title: "Kometa Client"
     color: "white"
 
+    EchoRequest {
+        id: request
+        message: echoField.text
+    }
 
     ColumnLayout {
         TextField {
             id: echoField
             placeholderText: "Enter text to echo"
             Layout.fillWidth: true
+            onAccepted: {
+                EchoClient.request(request)
+                text = ""
+            }
         }
 
         Text {
@@ -53,15 +61,15 @@ ApplicationWindow {
             }
             
             onClicked: {
-                EchoClient.Echo = echoField.text
-                var response = EchoClient.Echo
-                responseText.text = response
+                var response = EchoClient.response.message
+                responseText.text = EchoClient.response.message
                 responseText.visible = true
                 console.log(response)
             }
         }
 
         Text {
+            id: operatorsLabel
             text: "Operators:"
             font.bold: true
             font.pixelSize: 16
@@ -85,14 +93,17 @@ ApplicationWindow {
                 radius: 10
             }
             onClicked: {
-                    //EchoClient.getOperators(echoField.text, function(response) {
-                    //operatorsModel.clear()
-                    //for (var i = 0; i < response.operators.length; i++) {
-                     //   operatorsModel.append(response.operators[i])
-                    //}
-                    //operatorsLabel.visible = true
-                //})
-                EchoClient.get_operators
+                EchoClient.get_operators 
+                // ().then(function(response) {
+                //     operatorsModel.clear()
+
+                //     for (var i = 0; i < response.operators.length; ++i) {
+                //         operatorsModel.append(response.operators[i])
+                //     }
+                //     opearatorsLabel.visible = true
+                // })
+
+
             }
         }
     }

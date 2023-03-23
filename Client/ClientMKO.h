@@ -18,11 +18,6 @@ using grpc::Status;
 using namespace qtprotobuf::testrpc;
 
 
-// using qtprotobuf::testrpc::EchoRequest;
-// using qtprotobuf::testrpc::EchoResponse;
-// using qtprotobuf::testrpc::Operators;
-
-
 
 class ClientMKO : public QObject {
     Q_OBJECT
@@ -54,20 +49,29 @@ private:
 
 class EchoClient : public QObject {
     Q_OBJECT
-    Q_PROPERTY(QString Echo READ Echo WRITE set_msg NOTIFY msg_changed)
 	Q_PROPERTY(QString get_operators READ get_operators)
+    Q_PROPERTY(EchoResponse* response READ response CONSTANT)
 public:
     explicit EchoClient(QObject* parent = nullptr);
     ~EchoClient() = default;
 
-    void set_msg(const QString& message); 
-    QString Echo() const; 
+    Q_INVOKABLE void request(EchoRequest *request);
+
+    EchoResponse* response() const {
+        qDebug() << "response()";
+        return m_response.get();
+    }
+
     QString get_operators();
 
 private:
     std::unique_ptr<EchoServiceClient> m_client;
     std::unique_ptr<EchoResponse> m_response;
-
+    std::vector<std::shared_ptr<Operators>> m_operators_list;
+    void print_list_operators() const;
+public slots:
+    void add_operator_list(std::shared_ptr<Operators> list);
 signals:
     void msg_changed();
+    void send_operators(std::shared_ptr<Operators>);
 };

@@ -6,6 +6,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QLoggingCategory>
+
 
 #include <grpc/grpc.h>
 #include <grpcpp/channel.h>
@@ -19,7 +21,7 @@ ClientMKO::ClientMKO(QObject *parent) : QObject(parent),
 										m_client(new EchoServiceClient),
 										m_response(new EchoResponse)
 {
-
+	
 	auto channel = std::shared_ptr<QAbstractGrpcChannel>(new QGrpcHttp2Channel(QUrl("http://localhost:65000"),
 																			   QGrpcInsecureChannelCredentials() |
 																				   QGrpcInsecureCallCredentials()));
@@ -57,43 +59,43 @@ EchoClient::EchoClient(QObject *parent) : QObject(parent),
 	});
 }
 
-void EchoClient::set_msg(const QString& message) {
-	m_response->setMessage(message);
-    emit msg_changed();
+void EchoClient::request(EchoRequest *request) {
+	qDebug() << "request()" << request->message();
+	m_client->Echo(*request, m_response.get());
 }
 
-QString EchoClient::Echo() const {
-	return m_response->message();
+void EchoClient::add_operator_list(std::shared_ptr<Operators> list) {
+	qDebug() << "add operator list";
+	qDebug() << list->name();
+	m_operators_list.push_back(list);
+	print_list_operators();
 }
-
 
 QString EchoClient::get_operators() {
-/*
- QString EchoClient::get_operators()
-{
-    if (!m_client) {
-        // Create the client if it doesn't exist
-        m_client = std::make_unique<EchoServiceClient>(this);
-    }
+	m_operators_list.clear();
 
-    // Subscribe to the operators update stream
-    const auto subscription = m_client->subscribeGet_operatorsUpdates(qtprotobuf::testrpc::EchoRequest());
+	auto lists =
+	 	m_client->subscribeGet_operatorsUpdates(EchoRequest());
 
-    // Wait for the initial response
-    subscription->waitForReady();
+	QObject::connect(lists.get(), &QGrpcSubscription::updated, [=]()
+					 {	
+						std::shared_ptr<Operators> ref_operators = std::shared_ptr<Operators>(new Operators(lists->read<Operators>()));
+						emit send_operators(ref_operators);
+					 });
 
-    // Retrieve the operators from the initial response
-    const QStringList operators = subscription->value().operators();
+	QObject::connect(this, &EchoClient::send_operators, this, &EchoClient::add_operator_list);
 
-    // Return the operators as a single string
-    return operators.join(", ");
-}
-*
- */
-	const auto subscription = m_client->subscribeGet_operatorsUpdates(EchoRequest());
+	qDebug() << "get_operators()";
 
+	return "OK";
 }
 
+void EchoClient::print_list_operators() const {
+	qDebug() << "Test print list operators";
+	for (const auto& i : m_operators_list) {
+		qDebug() << i->name() << i->command() << i->description();
+	}
+}
 
 
 
