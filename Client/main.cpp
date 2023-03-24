@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QtProtobufTypes>
 #include <QStringListModel>
+#include <QMetaType>
 
 #include "ClientMKO.h"
 
@@ -14,23 +15,23 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    // EchoClient* client = new EchoClient(&app);
+    // engine.rootContext()->setContextProperty("EchoClient", client);
+    // qmlRegisterSingletonInstance("com.example", 1, 0, "EchoClient", client); 
+
     const QUrl url(QStringLiteral("qrc:/main_window.qml"));
+
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
 
-		// Register Types(required)
-		QtProtobuf::qRegisterProtobufTypes();
 
-	// qmlRegisterSingletonType<ClientMKO>("qtprotobuf.testrpc", 1, 0, "ClientMKO",
-	// 																		[](QQmlEngine* engine, QJSEngine*) {
-	// 	static ClientMKO echo_engine;
-	// 	QQmlEngine::setObjectOwnership(&echo_engine, QQmlEngine::CppOwnership);
+	// Register Types(required)
+	QtProtobuf::qRegisterProtobufTypes();
 
-	// 	return &echo_engine;
-	// });
 
     qmlRegisterSingletonType<EchoClient>("echoClient", 1, 0, "EchoClient",
                                         [](QQmlEngine* engine, QJSEngine*) {
@@ -42,9 +43,9 @@ int main(int argc, char *argv[])
 
     });
 
-        
-    engine.load(url);
+        engine.load(url);
 
     return QGuiApplication::exec();
+
 
 }

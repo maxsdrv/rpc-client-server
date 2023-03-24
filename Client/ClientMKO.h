@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QDebug>
 #include <QTcpServer>
+#include <QFutureWatcher>
 
 #include "rpc_mko_grpc.qpb.h"
 #include "rpc_mko.qpb.h"
@@ -17,40 +18,12 @@ using grpc::Status;
 
 using namespace qtprotobuf::testrpc;
 
-
-
-class ClientMKO : public QObject {
-    Q_OBJECT
-    Q_PROPERTY(EchoResponse* response READ response CONSTANT)
-    Q_PROPERTY(EchoResponse* array_op READ array_op CONSTANT)
-
-public:
-  explicit ClientMKO(QObject *parent = nullptr);
-  ~ClientMKO() override { qDebug() << "~ClientMKO()"; }
-
-  Q_INVOKABLE void request(EchoRequest* req);
-  Q_INVOKABLE void get_operators(EchoRequest* get_op);
-
-  qtprotobuf::testrpc::EchoResponse* response() const {
-	qDebug() << "Response message: " << m_response->message();
-    return m_response.get();
-  }
-  qtprotobuf::testrpc::EchoResponse* array_op() const {
-      qDebug() <<  "List operators: ";
-      return m_response.get();
-  }
-  
-
-private:
-
-    std::unique_ptr<EchoServiceClient> m_client;
-    std::unique_ptr<EchoResponse> m_response;
-};
-
 class EchoClient : public QObject {
     Q_OBJECT
-	Q_PROPERTY(QString get_operators READ get_operators)
+	//Q_PROPERTY(QString get_operators READ get_operators)
     Q_PROPERTY(EchoResponse* response READ response CONSTANT)
+    Q_PROPERTY(QStringList operators_list READ operators_list NOTIFY operators_list_changed)
+
 public:
     explicit EchoClient(QObject* parent = nullptr);
     ~EchoClient() = default;
@@ -62,16 +35,26 @@ public:
         return m_response.get();
     }
 
-    QString get_operators();
+    Q_INVOKABLE void get_operators();
+
+    QStringList operators_list() const {
+        return list_name;
+    }
+
 
 private:
     std::unique_ptr<EchoServiceClient> m_client;
     std::unique_ptr<EchoResponse> m_response;
     std::vector<std::shared_ptr<Operators>> m_operators_list;
+    QStringList list_name;
+
     void print_list_operators() const;
+
 public slots:
-    void add_operator_list(std::shared_ptr<Operators> list);
+    QString add_operator_list(std::shared_ptr<Operators> list);
+
 signals:
     void msg_changed();
     void send_operators(std::shared_ptr<Operators>);
+    void operators_list_changed();
 };

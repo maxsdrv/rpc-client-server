@@ -3,6 +3,7 @@ set(TARGET client_mko_grpc )
 
 qt_protobuf_internal_find_dependencies()
 
+find_package(Qt5 REQUIRED COMPONENTS Concurrent)
 
 
 set(PROJECT_SOURCES
@@ -21,6 +22,7 @@ qt_protobuf_internal_add_example(TARGET ${TARGET}
         QML_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(${TARGET} PRIVATE examples_common
+        Qt5::Concurrent
         PUBLIC
         ${_REFLECTION}
         ${_GRPC_GRPCPP}
