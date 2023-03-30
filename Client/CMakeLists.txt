@@ -8,16 +8,20 @@ find_package(Qt5 REQUIRED COMPONENTS Concurrent)
 
 set(PROJECT_SOURCES
         ClientMKO.h
-        ClientMKO.cpp
-        main.cpp
-        # qml.qrc
+        OperatorsListModelBase.h
+        OperatorsListModel.h
         )
+set(PROJ_CPP 
+        ClientMKO.cpp
+        OperatorsListModelBase.cpp 
+        OperatorsListModel.cpp
+        )
+
 link_directories(../Libraries/examples_common/)
 
 qt_protobuf_internal_add_example(TARGET ${TARGET}
         PROTO_FILES "${CMAKE_CURRENT_SOURCE_DIR}/rpc_mko.proto"
-        SOURCES main.cpp
-                ClientMKO.cpp
+        SOURCES main.cpp ${PROJ_CPP}
         RESOURCES qml.qrc
         QML_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 

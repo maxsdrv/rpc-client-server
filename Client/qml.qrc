@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>main_window.qml</file>
+        <file>OperatorView.qml</file>
     </qresource>
 </RCC>

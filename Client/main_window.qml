@@ -20,16 +20,26 @@ ApplicationWindow {
         id: request
         message: echoField.text
     }
-
+    
 
     ColumnLayout {
         TextField {
             id: echoField
+            color: "#FFFFFF"
             placeholderText: "Enter text to echo"
             Layout.fillWidth: true
             onAccepted: {
                 EchoClient.request(request)
                 text = ""
+            }
+
+            background: Rectangle {
+            radius: 20            
+            border {
+                width: 2
+                color: echoField.focus ? "#E91E63" : "#FFFFFF"
+            }
+            color: "#424242"
             }
         }
 
@@ -85,6 +95,21 @@ ApplicationWindow {
         
             
     }
-    
 
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

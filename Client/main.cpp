@@ -7,6 +7,8 @@
 
 #include "ClientMKO.h"
 
+using namespace qtprotobuf::testrpc;
+
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -14,24 +16,11 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
-    QQmlApplicationEngine engine;
-
-    // EchoClient* client = new EchoClient(&app);
-    // engine.rootContext()->setContextProperty("EchoClient", client);
-    // qmlRegisterSingletonInstance("com.example", 1, 0, "EchoClient", client); 
-
-    const QUrl url(QStringLiteral("qrc:/main_window.qml"));
-
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
-
-
 	// Register Types(required)
 	QtProtobuf::qRegisterProtobufTypes();
 
+    // qmlRegisterType<OperatorsModel>("echoClient", 1, 0, "OperatorsModel");
+    qmlRegisterUncreatableType<OperatorsModel>("echoClient", 1, 0, "OperatorsModel", "");
 
     qmlRegisterSingletonType<EchoClient>("echoClient", 1, 0, "EchoClient",
                                         [](QQmlEngine* engine, QJSEngine*) {
@@ -43,7 +32,18 @@ int main(int argc, char *argv[])
 
     });
 
-        engine.load(url);
+    QQmlApplicationEngine engine;
+
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
+
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+                     &app, [url](QObject *obj, const QUrl &objUrl) {
+        if (!obj && url == objUrl)
+            QCoreApplication::exit(-1);
+    }, Qt::QueuedConnection);
+
+
+    engine.load(url);
 
     return QGuiApplication::exec();
 

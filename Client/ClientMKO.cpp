@@ -16,6 +16,7 @@
 #include <grpcpp/grpcpp.h>
 
 using namespace QtProtobuf;
+using namespace qtprotobuf::testrpc;
 
 
 EchoClient::EchoClient(QObject *parent) : QObject(parent),
@@ -69,13 +70,16 @@ void EchoClient::get_operators() {
 
 						emit send_operators(ref_operators);
 					 });
-
+					 
+	
 
 	QObject::connect(this, &EchoClient::send_operators, this, &EchoClient::add_operator_list);
-
+	
+	
 	qDebug() << "get_operators()";
+	
 
-	lists->cancel();
+	// lists->cancel();
 }
 
 

@@ -2,101 +2,43 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
 import qtprotobuf.testrpc 1.0
+import echoClient 1.0
 
-Window {
+
+
+ApplicationWindow {
     id: root
-
-    width: 640
-    height: 480
+    width: 600
+    height: 400
     visible: true
-    title: qsTr("Client Testing")
-    color: "#faebd7"
+    title: "Operators List"
 
-    EchoRequest {
-        id: request
-
-        message: messageInput.text
+    Connections {
+        target: EchoClient
+        onOperators_list_changed: {
+            OperatorsModel.clear
+            for (var i = 0; i < EchoClient.operators_list.length; i++) {
+                var operator = EchoClient.operators_list[i]
+                console.log("LooLoooLoo: ", operator)
+                OperatorsModel.append({
+                    name: operator.name,
+                    command: operator.command,
+                    description: operator.description
+                })
+            }
+        }
     }
+    Component.onCompleted: EchoClient.get_operators()
 
-    Column {
-        spacing: 20
 
-        Row {
-            spacing: 20
-
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Enter request message: "
-            }
-
-            TextField {
-                id: messageInput
-
-                anchors.verticalCenter: parent.verticalCenter
-                width: 400
-                onAccepted: {
-                    ClientMKO.request(request);
-                    ClientMKO.get_operators(request);
-                    text = "";
-                }
-            }
-
-        }
-
-        Row {
-            spacing: 20
-
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Server respond:"
-            }
-
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                text: ClientMKO.response.message
-            }
-
-        }
-
-    }
-
-    Rectangle {
-        anchors.verticalCenter: parent.verticalCenter
-        width: parent.width
-        height: 20
-        radius: 3
-        border.width: 1
-        border.color: "darkgray"
-        color: "lightgray"
-        Text {
-            anchors.centerIn: parent
-            text: "List Operators"
-            color: "black"
-        }
-
-        Column {
-            spacing: 20
-            y: parent.height + 20
-            width: parent.width
-            height: 20
-
-            Row {
-                spacing: 20
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: "Commands:"
-                    color: "black"
-                }
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: ClientMKO.array_op.command
-                }
-                
-            }
+    ListView {
+        id: listView
+        anchors.fill: parent
+        model: EchoClient.operators
+        delegate: Text {
 
         }
     }
-
-    
 
 }
+
