@@ -24,7 +24,7 @@ class EchoClient : public QObject {
 Q_OBJECT
   Q_PROPERTY(EchoResponse *response READ response CONSTANT)
   Q_PROPERTY(QStringList operators_list READ operators_list NOTIFY operators_list_changed)
-  Q_PROPERTY(OperatorsModel *operators READ operators CONSTANT)
+  Q_PROPERTY(qtprotobuf::testrpc::OperatorsModel *operators READ operators CONSTANT)
 
 public:
   explicit EchoClient(QObject *parent = nullptr);

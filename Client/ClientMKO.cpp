@@ -48,6 +48,7 @@ QString EchoClient::add_operator_list(std::shared_ptr<Operators> list) {
 	m_operators_list.push_back(list);
 
 	list_name.append(list->name());	
+	model_operators.append(list.get());
 
 	emit operators_list_changed();
 
@@ -71,15 +72,9 @@ void EchoClient::get_operators() {
 						emit send_operators(ref_operators);
 					 });
 					 
-	
 
 	QObject::connect(this, &EchoClient::send_operators, this, &EchoClient::add_operator_list);
 	
-	
-	qDebug() << "get_operators()";
-	
-
-	// lists->cancel();
 }
 
 
