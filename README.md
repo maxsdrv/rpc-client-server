@@ -12,10 +12,10 @@ This project demonstrates a simple RPC client-server communication using gRPC an
 # Prerequisites
 To build and run this project, you will need:
 
-CMake 3.15 or higher
-gRPC 1.38 or higher
-Protobuf 3.0 or higher
-Qt 5 or higher
+* CMake 3.15 or higher
+* gRPC 1.38 or higher
+* Protobuf 3.0 or higher
+* Qt 5 or higher
 
 # Building the Project
 To build the project, follow these steps:
@@ -31,18 +31,21 @@ This will generate two executable files: server and client in the build director
 Running the Applications
 To run the server, navigate to the build directory and run the server executable:
 
+```
 bash
-Copy code
 cd build
 ./server
+```
 The server will start running and listening on port 50051.
 
 To run the client, open a new terminal window and navigate to the build directory. Then run the client executable:
 
+```
 bash
-Copy code
 cd build
 ./client
+```
+
 The client will connect to the server and make a simple RPC call.
 
 Contributing
