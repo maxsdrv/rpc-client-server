@@ -8,13 +8,19 @@ import echoClient 1.0
 
 ApplicationWindow {
     id: root
-    width: 600
-    height: 400
+    width: 640
+    height: 480
     visible: true
     title: "Operators List"
 
-    MouseArea {
+    Rectangle {
+        //color: "#1E90FF"
+        color: "#800020"
+        //color: "#4B0082"
+        //color: "#008080"
+        //color: "#808000"
         anchors.fill: parent
+        z: -1
     }
 
     Connections {
@@ -32,7 +38,11 @@ ApplicationWindow {
 
     ListView {
         id: listView
-        anchors.fill: parent
+//        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.bottom: descriptionArea.top
+        anchors.left: parent.left
+        anchors.right: parent.right
         model: EchoClient.operators
         delegate: Item {
             height: _someWrapper.height + 10
@@ -65,38 +75,69 @@ ApplicationWindow {
                         rightMargin: 10
                         verticalCenter: parent.verticalCenter
                     }
-                }
-                Text {
-                    id: _nameOp
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                    Text {
+                       id: _nameOp
+                       anchors.left: parent.left
+                       anchors.right: parent.right
+                       font.pointSize: 12
+                       font.weight: Font.Bold
+                       color: "#ffffff"
+                       text: model.name + ": " +  model.command
+
+                       MouseArea {
+                           anchors.fill: parent
+                           onClicked: {
+//                               selectedOperator = model
+                               root.selectedOperator.push(model.description)
+                               console.log(root.selectedOperator)
+//                               console.log(selectedOperator.description)
+                           }
+                       }
+                    } // Text
+                } // Column
+            } // Item
+        } // delegate Item
+        clip: true
+    } // ListView
+
+    property var selectedOperator: []
+
+
+    Rectangle {
+        id: descriptionArea
+        width: listView.width / 2
+        height: root.height - listView.height
+        anchors.bottom: parent.bottom
+        color: "#424242"
+        radius: 20
+        border.color: "#E91E63"
+        border.width: 1
+        Column {
+            anchors.fill: parent
+            anchors.margins: 10
+            spacing: 10
+
+            Text {
+                text: "Description"
+                font.pointSize: 14
+                color: "#ffffff"
+            }
+            Repeater {
+                model: root.selectedOperator
+                Text{
+                    text: modelData
                     font.pointSize: 12
-                    font.pixelSize: 20
-                    font.weight: Font.Bold
-                    color: "black"
-                    text: model.name + ": "
-                    wrapMode: Text.WordWrap
-                    width: parent.width
-                    height: contentHeight
-                    padding: 5
+                    color: "#ffffff"
                 }
             }
         }
-
-//        delegate: Text {
-//            text: model.name + " " + "( " + model.command + " )" + " " + model.description
-//            font.pixelSize: 20
-//            color: "black"
-//            verticalAlignment: Text.AlignVCenter
-//            horizontalAlignment: Text.AlignHCenter
-//            wrapMode: Text.WordWrap
-//            width: parent.width
-//            height: contentHeight
-//            padding: 5
-//        }
-        clip: true
-
     }
-
 }
+
+
+
+
+
+
+
 

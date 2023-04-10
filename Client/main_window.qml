@@ -8,95 +8,144 @@ import echoClient 1.0
 
 
 
-ApplicationWindow {
+Window {
+    id: root
     visible: true
-    width: 400
-    height: 500
+    width: 640
+    height: 480
     title: "Kometa Client"
     color: "white"
-
-
-    EchoRequest {
-        id: request
-        message: echoField.text
+    Rectangle {
+        color: "#800020"
+        anchors.fill: parent
     }
-    
+    // Load operators from Client
+    Component.onCompleted: EchoClient.get_operators()
+    // Value for store operator description
+    property var descOperator: []
+    ListView {
+        id: listView
+        model: EchoClient.operators
+        anchors.top: parent.top
+        anchors.bottom: descriptionArea.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        topMargin: 5
+        spacing: 2
+        delegate: Item {
+            height: itemWrapper.height + 10
+            width: root.width
+            Item {
+                id: itemWrapper
+                height: operatorColumn.height
+                width: parent.width / 2 - 20
+                anchors {
+                    right: parent.right
+                    left: parent.left
+                    leftMargin: 10
+                    rightMargin: 10
+                    verticalCenter: parent.verticalCenter
+                }
 
-    ColumnLayout {
-        TextField {
-            id: echoField
-            color: "#FFFFFF"
-            placeholderText: "Enter text to echo"
+                Rectangle {
+                    height: operatorColumn.height + 10
+                    width: parent.width / 2 - 40
+                    radius: 20
+                    color: "#424242"
+                    border.color: "#E91E63"
+                    border.width: 1
+                    anchors {
+                        leftMargin: 10
+                        rightMargin: 10
+                        verticalCenter: parent.verticalCenter
+                    }
+                }
+                Column {
+                    id: operatorColumn
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: 10
+                        rightMargin: 10
+                        verticalCenter: parent.verticalCenter
+                    }
+                    Text {
+                        id: operatorName
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        font.pointSize: 12
+                        font.weight: Font.Bold
+                        color: "#ffffff"
+                        text: model.name + ": " + model.command
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                root.descOperator = model.description
+                                //for debugging
+                                console.log(root.descOperator)
+                                console.log(typeof root.descOperator)
+                            }
+                        }
+                    }
+
+                } // Column
+
+            } // Item
+
+        } // delegate
+
+    } // ListView
+
+
+    Rectangle {
+        id: descriptionArea
+        width: 300
+        height: 300
+        anchors.bottom: parent.bottom
+        color: "#424242"
+        radius: 20
+        border.color: "#E91E63"
+        border.width: 1
+        Column {
+            anchors.fill: parent
+            anchors.margins: 10
+            spacing: 10
+
+            Text {
+                text: "Description: "
+                font.pointSize: 14
+                color: "#ffffff"
+                font.underline: true
+            }
+            Repeater {
+                model: descOperator
+                Text {
+                    text: modelData
+                    font.pointSize: 12
+                    color: "#ffffff"
+                }
+            }
+        }
+    } // Rectangle
+
+    RowLayout {
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: 10
+
+        Rectangle {
+            id: spacer
             Layout.fillWidth: true
-            onAccepted: {
-                EchoClient.request(request)
-                text = ""
-            }
-
-            background: Rectangle {
-            radius: 20            
-            border {
-                width: 2
-                color: echoField.focus ? "#E91E63" : "#FFFFFF"
-            }
-            color: "#424242"
-            }
         }
 
-        Text {
-            id: responseText
-            text: ""
-            font.pixelSize: 14
-            visible: false
-        }
-
-        Button {
-            text: "Echo"
-            background: Rectangle {
-                color: "#696969"
-                radius: 10
-            }
-            
+        RoundButton {
+            text: "Run"
             onClicked: {
-                var response = EchoClient.response.message
-                responseText.text = EchoClient.response.message
-                responseText.visible = true
-                console.log(response)
+
             }
         }
-
-        Text {
-            id: operatorsLabel
-            text: "Operators: " + EchoClient.operators_list.join(", ")
-            font.bold: true
-            font.pixelSize: 16
-            visible: EchoClient.operators_list.length > 0
-        }
-
-        
-
-        Button {
-            text: "Get Operators"
-            background: Rectangle {
-                color: "#696969"
-                radius: 10
-            }
-            onClicked: {
-                EchoClient.get_operators()
-            }
-        }
-
-        Connections {
-            target: EchoClient
-            onSend_operators: {
-                console.log("Received operators: " + EchoClient.operators_list)
-            }
-        }
-        
-            
     }
 
-    
 }
 
 

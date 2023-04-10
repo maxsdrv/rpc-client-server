@@ -1,5 +1,7 @@
 #pragma once
 
+#include <QDebug>
+
 #include "OperatorsListModelBase.h"
 
 
@@ -21,16 +23,16 @@ public:
         DescriptionRole
     };
 
-    int count() const override {
+    [[nodiscard]] int count() const override {
         return m_container.count();
     }
 
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override {
+    [[nodiscard]] int rowCount(const QModelIndex& parent) const override {
         Q_UNUSED(parent)
         return count();
     }
 
-    QHash<int, QByteArray> roleNames() const override {
+    [[nodiscard]] QHash<int, QByteArray> roleNames() const override {
         s_role_names[NameRole] = "name";
         s_role_names[CommandRole] = "command";
         s_role_names[DescriptionRole] = "description";
@@ -38,7 +40,7 @@ public:
         return s_role_names;
     }
 
-    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override {
+    [[nodiscard]] QVariant data(const QModelIndex& index, int role) const override {
         int row = index.row();
 
         if (row < 0 || row >= m_container.count() || m_container.at(row).isNull()) {

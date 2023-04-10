@@ -32,14 +32,14 @@ public:
 
   Q_INVOKABLE void request(EchoRequest *request);
 
-  EchoResponse *response() const {
+  [[nodiscard]] EchoResponse *response() const {
 	  qDebug() << "response()";
 	  return m_response.get();
   }
 
   Q_INVOKABLE void get_operators();
 
-  QStringList operators_list() const {
+  [[nodiscard]] QStringList operators_list() const {
 	  return list_name;
   }
 
