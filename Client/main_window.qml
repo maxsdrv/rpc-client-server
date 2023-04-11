@@ -11,8 +11,10 @@ import echoClient 1.0
 Window {
     id: root
     visible: true
-    width: 640
-    height: 480
+    maximumHeight: 1024
+    maximumWidth: 800
+    minimumHeight: 1024
+    minimumWidth: 800
     title: "Kometa Client"
     color: "white"
     Rectangle {
@@ -82,11 +84,16 @@ Window {
                             anchors.fill: parent
                             onClicked: {
                                 root.descOperator = model.description
-                                //for debugging
-                                console.log(root.descOperator)
-                                console.log(typeof root.descOperator)
+                                EchoClient.operator_selected(model.name)
                             }
                         }
+                        Connections {
+                            target: EchoClient
+                            onOperator_selected: {
+                                EchoClient.handle_operator_selected(name)
+                            }
+                        }
+                        
                     }
 
                 } // Column
@@ -127,24 +134,108 @@ Window {
                 }
             }
         }
-    } // Rectangle
+    } // Rectangle description
+
+    Rectangle {
+        id: resultArea
+        width: 300
+        height: 300
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        color: "#424242"
+        radius: 20
+        border.width: 1
+        border.color: "#E91E63"
+        Column {
+            anchors.fill: parent
+            anchors.margins: 10
+            spacing: 10
+            Text {
+                text: "Response:"
+                font.pointSize: 14
+                color: "#ffffff"
+                font.underline: true
+            }
+        }
+    }
+
 
     RowLayout {
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.right: parent.left / 2
         spacing: 10
-
         Rectangle {
             id: spacer
-            Layout.fillWidth: true
         }
-
         RoundButton {
             text: "Run"
             onClicked: {
 
             }
         }
-    }
+
+    } // RowLayout for Run button
+
+    ColumnLayout {
+        spacing: 10
+        anchors.fill: parent
+        Rectangle {
+            id: tickerRect
+            Layout.fillWidth: true
+            Layout.preferredHeight: 40
+            color: "white"
+            radius: 5
+            border.width: 1
+            border.color: "black"
+
+            Text {
+                id: tickerText
+                text: "Test operators !!!"
+                font.bold: true
+                anchors.verticalCenter: parent.verticalCenter
+                x: tickerRect.width
+            }
+            Timer {
+                interval: 10
+                running: true
+                repeat: true
+                onTriggered: {
+                    if (tickerText.x < -tickerText.width) {
+                        tickerText.x = tickerRect.width
+                    }
+                    else {
+                        tickerText.x -= 1
+                    }
+                }
+            }
+
+            gradient: Gradient {
+                GradientStop {
+                    position: 0
+                    color: "red"
+                }
+                GradientStop {
+                    id: gradientStop
+                    position: 1
+                    color: "blue"
+                }
+            }
+
+            Behavior on gradient {
+                PropertyAnimation {
+                    target: gradientStop
+                    property: "position"
+                    from: 1
+                    to: 0
+                    duration: 2000
+                    loops: Animation.Infinite
+                    running: true
+                }
+
+            }
+        } // Animated Rectangle
+    } // Split Down
 
 }
 

@@ -19,4 +19,5 @@ message Operators {
 service EchoService {
     rpc Echo(EchoRequest) returns (EchoResponse);
     rpc get_operators(EchoRequest) returns (stream Operators);
+    rpc calculations(Operators) returns (EchoResponse);
 }

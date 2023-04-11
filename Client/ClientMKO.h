@@ -23,7 +23,7 @@ using OperatorsModel = OperatorsListModel<qtprotobuf::testrpc::Operators>;
 class EchoClient : public QObject {
 Q_OBJECT
   Q_PROPERTY(EchoResponse *response READ response CONSTANT)
-  Q_PROPERTY(QStringList operators_list READ operators_list NOTIFY operators_list_changed)
+  Q_PROPERTY(QStringList operators_list READ operators_list)
   Q_PROPERTY(qtprotobuf::testrpc::OperatorsModel *operators READ operators CONSTANT)
 
 public:
@@ -31,22 +31,13 @@ public:
   ~EchoClient() override = default;
 
   Q_INVOKABLE void request(EchoRequest *request);
-
-  [[nodiscard]] EchoResponse *response() const {
-	  qDebug() << "response()";
-	  return m_response.get();
-  }
-
   Q_INVOKABLE void get_operators();
+  Q_INVOKABLE void get_result();
 
-  [[nodiscard]] QStringList operators_list() const {
-	  return list_name;
-  }
+  [[nodiscard]] EchoResponse *response() const; 
+  [[nodiscard]] QStringList operators_list() const; 
+  OperatorsModel *operators(); 
 
-  OperatorsModel *operators() {
-	  qDebug() << __func__ << "operators() called";
-	  return &model_operators;
-  }
 private:
   std::unique_ptr<EchoServiceClient> m_client;
   std::unique_ptr<EchoResponse> m_response;
@@ -54,17 +45,16 @@ private:
   QStringList list_name;
   OperatorsModel model_operators;
 
-  void print_list_operators() const;
 
 public slots:
-  QString add_operator_list(std::shared_ptr<Operators> list);
-
+  void add_operator_list(std::shared_ptr<Operators> list);
+  void handle_operator_selected(const QString& name);
 signals:
-  void msg_changed();
   void send_operators(std::shared_ptr<Operators>);
-  void operators_list_changed();
+  void operator_selected(QString name);
 
 };
+
 }
 
 Q_DECLARE_METATYPE(qtprotobuf::testrpc::OperatorsModel*)

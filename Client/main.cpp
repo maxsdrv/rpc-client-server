@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
 	// Register Types(required)
 	QtProtobuf::qRegisterProtobufTypes();
 
-    // qmlRegisterType<OperatorsModel>("echoClient", 1, 0, "OperatorsModel");
     qmlRegisterUncreatableType<OperatorsModel>("echoClient", 1, 0, "OperatorsModel", "");
 
     qmlRegisterSingletonType<EchoClient>("echoClient", 1, 0, "EchoClient",

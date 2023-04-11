@@ -63,7 +63,6 @@ public:
                 return {};
         }
 
-        // return data_ptr->property(s_role_names.value(role));
     }
     int append(T *value) {
         qDebug() << "Append called";
