@@ -21,7 +21,7 @@ link_directories(../Libraries/examples_common/)
 
 qt_protobuf_internal_add_example(TARGET ${TARGET}
         PROTO_FILES "${CMAKE_CURRENT_SOURCE_DIR}/rpc_mko.proto"
-        SOURCES main.cpp ${PROJ_CPP}
+        SOURCES main.cpp ${PROJ_CPP} ${PROJECT_SOURCES}
         RESOURCES qml.qrc
         QML_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 

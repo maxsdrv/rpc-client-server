@@ -62,8 +62,9 @@ public:
             default:
                 return {};
         }
-
+        return data_ptr->property(s_role_names.value(role));
     }
+
     int append(T *value) {
         qDebug() << "Append called";
         Q_ASSERT_X(value != nullptr, full_template_name(), "Trying to add member of NULL"); 

@@ -33,62 +33,44 @@ EchoClient::EchoClient(QObject *parent) : QObject(parent),
 							  QGrpcInsecureChannelCredentials() |
 								  QGrpcInsecureCallCredentials())));
 
+    subscription =
+        m_client->subscribeGet_operatorsUpdates(EchoRequest());
+
+    connect(subscription.get(), &QGrpcSubscription::updated,
+            this, &EchoClient::handle_subscription);
+    connect(subscription.get(), &QGrpcSubscription::error, this, [=](QGrpcStatus status) {
+        qDebug() << status.message();
+    });
 }
 
 
-void EchoClient::add_operator_list(std::shared_ptr<Operators> list) {
-	qDebug() << "add operator list";
-	m_operators_list.push_back(list);
-	list_name.append(list->name());	
-	model_operators.append(list.get());
-}
-
-void EchoClient::get_operators() {
-	// Clear the list of operators
-	m_operators_list.clear();
-
-	// Subscribe to updates for the list of operators
-	auto lists =
-	 	m_client->subscribeGet_operatorsUpdates(EchoRequest());
-
-     // When an update is received, emit the send_operators signal with the new list
-	QObject::connect(lists.get(), &QGrpcSubscription::updated, [=]()
-					 {	
-						std::shared_ptr<Operators> ref_operators = std::shared_ptr<Operators>(new Operators(lists->read<Operators>()));
-						qDebug() << ref_operators->name() << ref_operators->command() << ref_operators->description();
-
-						emit send_operators(ref_operators);
-					 });
-					 
-
-	QObject::connect(this, &EchoClient::send_operators, this, &EchoClient::add_operator_list);
-	
+void EchoClient::handle_subscription() {
+    m_operators_list.push_back(std::shared_ptr<Operators>(new Operators(subscription->read<Operators>())));
+    model_operators.append(m_operators_list.back().get());
 }
 
 void EchoClient::handle_operator_selected(const QString& name) {
 	qDebug() << "Selected operator: " << name;
 	
-	auto shared_ptr_itr = std::find_if(m_operators_list.begin(),
-										m_operators_list.end(), 
-										[&](const std::shared_ptr<Operators>& optr) {
-		return optr->name() == name;									
-	});
+    auto shared_ptr_itr = std::find_if(m_operators_list.begin(),
+                                        m_operators_list.end(),
+                                        [&](const std::shared_ptr<Operators>& optr) {
+        return optr->name() == name;
+    });
 
-	if (shared_ptr_itr != m_operators_list.end()) {
-		m_client->calculations(shared_ptr_itr->get(), m_response.get());
-	}
-	else {
-		qDebug() << "Error, Operator does not exist";
-	}
+    if (shared_ptr_itr != m_operators_list.end()) {
+        m_client->calculations(shared_ptr_itr->get(), m_response.get());
+    }
+    else {
+        qDebug() << "Error, Operator does not exist";
+    }
+}
+void EchoClient::handle_operator_selected2(QObject* obj) {
+    qDebug() << "Selected operator object" << obj;
+
 }
 
-EchoResponse* EchoClient::response() const {
-	qDebug() << "response()";
-	return m_response.get();
-}
-QStringList EchoClient::operators_list() const {
-	return list_name;
-}
+
 OperatorsModel* EchoClient::operators() {
 	qDebug() << __func__ << "operators() called";
 	return &model_operators;

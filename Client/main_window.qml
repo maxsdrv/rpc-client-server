@@ -3,7 +3,6 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
 
-import qtprotobuf.testrpc 1.0
 import echoClient 1.0
 
 
@@ -22,7 +21,7 @@ Window {
         anchors.fill: parent
     }
     // Load operators from Client
-    Component.onCompleted: EchoClient.get_operators()
+//    Component.onCompleted: EchoClient.get_operators()
     // Value for store operator description
     property var descOperator: []
     ListView {
@@ -84,13 +83,14 @@ Window {
                             anchors.fill: parent
                             onClicked: {
                                 root.descOperator = model.description
-                                EchoClient.operator_selected(model.name)
+//                                EchoClient.operator_selected(model.name)
+                                EchoClient.operator_selected(model)
                             }
                         }
                         Connections {
                             target: EchoClient
-                            onOperator_selected: {
-                                EchoClient.handle_operator_selected(name)
+                            function onOperator_selected(model) {
+                                EchoClient.handle_operator_selected2(model)
                             }
                         }
                         
@@ -157,7 +157,7 @@ Window {
                 font.underline: true
             }
         }
-    }
+    } // Rectangle for display result of operator
 
 
     RowLayout {
@@ -188,27 +188,6 @@ Window {
             radius: 5
             border.width: 1
             border.color: "black"
-
-            Text {
-                id: tickerText
-                text: "Test operators !!!"
-                font.bold: true
-                anchors.verticalCenter: parent.verticalCenter
-                x: tickerRect.width
-            }
-            Timer {
-                interval: 10
-                running: true
-                repeat: true
-                onTriggered: {
-                    if (tickerText.x < -tickerText.width) {
-                        tickerText.x = tickerRect.width
-                    }
-                    else {
-                        tickerText.x -= 1
-                    }
-                }
-            }
 
             gradient: Gradient {
                 GradientStop {
