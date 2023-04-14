@@ -21,8 +21,9 @@ using namespace qtprotobuf::testrpc;
 
 
 EchoClient::EchoClient(QObject *parent) : QObject(parent),
-										  m_client(new EchoServiceClient),
-										  m_response(new EchoResponse)
+										  m_client(std::make_unique<EchoServiceClient>()),
+										  m_response(std::make_unique<EchoResponse>()),
+                                          model_operators(std::make_shared<OperatorsModel>())
 {
 	auto channel = std::shared_ptr<QAbstractGrpcChannel>(new QGrpcHttp2Channel(QUrl("http://localhost:65000"),
 																			QGrpcInsecureChannelCredentials() |
@@ -32,58 +33,41 @@ EchoClient::EchoClient(QObject *parent) : QObject(parent),
 	new QGrpcHttp2Channel(QUrl("http://localhost:65000"),
 							  QGrpcInsecureChannelCredentials() |
 								  QGrpcInsecureCallCredentials())));
+    
 
     subscription =
         m_client->subscribeGet_operatorsUpdates(EchoRequest());
 
     connect(subscription.get(), &QGrpcSubscription::updated,
             this, &EchoClient::handle_subscription);
+
     connect(subscription.get(), &QGrpcSubscription::error, this, [=](QGrpcStatus status) {
         qDebug() << status.message();
     });
-}
 
+    // Handle qml interface when user works with Operators
+    connect(this, &EchoClient::operator_selected, this, &EchoClient::handle_operator_selected2);
+
+}
 
 void EchoClient::handle_subscription() {
-    m_operators_list.push_back(std::shared_ptr<Operators>(new Operators(subscription->read<Operators>())));
-    model_operators.append(m_operators_list.back().get());
+    auto operators = QSharedPointer<Operators>(new Operators(subscription->read<Operators>())); 
+    model_operators->append(operators);
 }
 
-void EchoClient::handle_operator_selected(const QString& name) {
-	qDebug() << "Selected operator: " << name;
-	
-    auto shared_ptr_itr = std::find_if(m_operators_list.begin(),
-                                        m_operators_list.end(),
-                                        [&](const std::shared_ptr<Operators>& optr) {
-        return optr->name() == name;
-    });
-
-    if (shared_ptr_itr != m_operators_list.end()) {
-        m_client->calculations(shared_ptr_itr->get(), m_response.get());
-    }
-    else {
-        qDebug() << "Error, Operator does not exist";
-    }
-}
-void EchoClient::handle_operator_selected2(QObject* obj) {
-    qDebug() << "Selected operator object" << obj;
+void EchoClient::handle_operator_selected2(qtprotobuf::testrpc::Operators op) {
+    qDebug() << "handle operator selected 2 called" << op.name() << op.command();
 
 }
 
 
 OperatorsModel* EchoClient::operators() {
 	qDebug() << __func__ << "operators() called";
-	return &model_operators;
+    return model_operators.get();
 }
 
-void EchoClient::request(EchoRequest *request) {
-	qDebug() << "request()" << request->message();
-	m_client->Echo(*request, m_response.get());
-}
 
-void EchoClient::get_result() {
 
-}
 
 
 

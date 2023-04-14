@@ -24,6 +24,7 @@ Window {
 //    Component.onCompleted: EchoClient.get_operators()
     // Value for store operator description
     property var descOperator: []
+    property var clickedItem: null
     ListView {
         id: listView
         model: EchoClient.operators
@@ -83,16 +84,19 @@ Window {
                             anchors.fill: parent
                             onClicked: {
                                 root.descOperator = model.description
-//                                EchoClient.operator_selected(model.name)
-                                EchoClient.operator_selected(model)
+                                var clickedItemIndex = index
+                                root.clickedItem = EchoClient.on_clicked_operator(clickedItemIndex);
+                                console.log(root.clickedItem + " clicked")
+                                EchoClient.operator_selected(root.clickedItem)
                             }
                         }
-                        Connections {
-                            target: EchoClient
-                            function onOperator_selected(model) {
-                                EchoClient.handle_operator_selected2(model)
-                            }
-                        }
+                        // Connections {
+                        //     target: EchoClient
+                        //     function onOperator_selected() {
+                        //         // EchoClient.handle_operator_selected2(modelData)
+                        //         console.log("Test test: ")
+                        //     }
+                        // }
                         
                     }
 
@@ -171,9 +175,9 @@ Window {
         RoundButton {
             text: "Run"
             onClicked: {
-
+                console.log("When run button", root.clickedItem.name)
             }
-        }
+        } // Round button which run command on execute
 
     } // RowLayout for Run button
 

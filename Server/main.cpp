@@ -1,7 +1,10 @@
 #include <QDebug>
+#include <functional>
+#include <csignal>
 
 #include "Server.h"
 #include "helper.h"
+
 
 void run_server(const QString& db_path) {
 	std::string server_address("0.0.0.0:65000");
@@ -12,6 +15,7 @@ void run_server(const QString& db_path) {
 	builder.RegisterService(&service);
 	std::unique_ptr<Server> server(builder.BuildAndStart());
 	std::cout << "Server listening on " << server_address << std::endl;
+
 	server->Wait();
 }
 

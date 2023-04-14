@@ -15,6 +15,7 @@ public:
     }
     ~OperatorsListModel() override {
         clear();
+        qDebug() << "~OperatorListModel";
     }
 
     enum Roles {
@@ -65,25 +66,34 @@ public:
         return data_ptr->property(s_role_names.value(role));
     }
 
-    int append(T *value) {
-        qDebug() << "Append called";
+    int append(QSharedPointer<T> value) {
+        qDebug() << "Append called" << value->name();
         Q_ASSERT_X(value != nullptr, full_template_name(), "Trying to add member of NULL"); 
         auto it = std::find_if(std::begin(m_container), std::end(m_container), 
         [value](const QSharedPointer<T> &ptr) {
-            return ptr.data() == value; 
+            return ptr == value; 
         });
         if (it != std::end(m_container)) {
 #ifdef DEBUG            
-            qDebug() << full_template_name() << "Member already exists";
+             qDebug() << full_template_name() << "Member already exists";
 #endif
-            return -1;
+             return -1;
         }
         beginInsertRows(QModelIndex(), m_container.count(), m_container.count());
-        m_container.append(QSharedPointer<T>(value));
+        m_container.append(value);
         emit count_changed();
         endInsertRows();
         return m_container.count() - 1;
     }
+
+    T* at(int index) const {
+        if (index < 0 || index >= m_container.size()) {
+            return nullptr;
+        }
+        return m_container.at(index).data();
+    
+    }
+
 
     void reset(const QList<QSharedPointer<T>> &container) {
         beginResetModel();
@@ -104,6 +114,7 @@ protected:
     void clear() {
         m_container.clear();
         emit count_changed();
+        qDebug() << "clear() called";
     }
 };
 

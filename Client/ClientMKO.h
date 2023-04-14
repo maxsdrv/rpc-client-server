@@ -25,29 +25,28 @@ Q_OBJECT
 
 public:
   explicit EchoClient(QObject *parent = nullptr);
-  ~EchoClient() override = default;
+  ~EchoClient() override { 
+    qDebug() << "~EchoClient()"; 
+  };
 
-  Q_INVOKABLE void request(qtprotobuf::testrpc::EchoRequest *request);
-  Q_INVOKABLE void get_result();
+  Q_INVOKABLE qtprotobuf::testrpc::Operators on_clicked_operator(int index) {
+      return model_operators->at(index); // !!!! ЕЛИ ВОЗВРАЩАТЬ УКАЗАТЕЛЬ БУДЕ SEGMENTATION FAULT
+  }
 
   OperatorsModel *operators(); 
 
 private:
   std::unique_ptr<EchoServiceClient> m_client;
   std::unique_ptr<EchoResponse> m_response;
-  std::vector<std::shared_ptr<Operators>> m_operators_list;
   std::shared_ptr<QtProtobuf::QGrpcSubscription> subscription;
-  OperatorsModel model_operators;
+  std::shared_ptr<OperatorsModel> model_operators;
 
 public slots:
-  void handle_operator_selected(const QString& name);
-  void handle_operator_selected2(QObject* obj);
+  void handle_operator_selected2(qtprotobuf::testrpc::Operators op); 
   void handle_subscription();
 signals:
-  void send_operators(std::shared_ptr<Operators>);
-//  void operator_selected(QString name);
-  void operator_selected(QObject* obj);
-
+  void operator_selected(qtprotobuf::testrpc::Operators op);
+  void run_button_execute();
 };
 
 }
